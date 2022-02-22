@@ -1,0 +1,94 @@
+ext {
+    //core dependencies
+    def appCompatVersion = "1.4.0"
+    def coreKtxVersion = "1.7.0"
+
+    coreDependencies = [
+            appCompat: "androidx.appcompat:appcompat:" + appCompatVersion,
+            coreKtx  : "androidx.core:core-ktx:" + coreKtxVersion
+    ]
+
+    //ui dependencies
+    def constraintLayoutVersion = "2.1.2"
+    def materialVersion = "1.4.0"
+    def recyclerViewVersion = "1.2.1"
+    def glideVersion = "4.12.0"
+
+    uiDependencies = [
+            constraintLayout: "androidx.constraintlayout:constraintlayout:" + constraintLayoutVersion,
+            material        : "com.google.android.material:material:" + materialVersion,
+            recyclerview    : "androidx.recyclerview:recyclerview:" + recyclerViewVersion,
+            glide           : "com.github.bumptech.glide:glide:" + glideVersion
+    ]
+
+    //navigation dependencies
+    def navigationVersion = "2.4.1"
+    navigationDependencies = [
+            fragmentNav: "androidx.navigation:navigation-fragment-ktx:" + navigationVersion,
+            uiNav      : "androidx.navigation:navigation-ui-ktx:" + navigationVersion
+    ]
+
+    //di dependencies
+    def hiltDaggerVersion = "2.41"
+    def hiltLifeCycleVersion = "1.0.0-alpha03"
+    diDependencies = [
+            hiltAndroid        : "com.google.dagger:hilt-android:$hiltDaggerVersion",
+            hiltLifecycle      : "androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifeCycleVersion",
+            hiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:$hiltDaggerVersion",
+            hiltCompiler       : "androidx.hilt:hilt-compiler:$hiltLifeCycleVersion"
+    ]
+
+    //coroutines dependencies
+    def coroutinesVersion = "1.6.0"
+
+    coroutinesDependencies = [
+            coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:" + coroutinesVersion,
+            coroutinesCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:" + coroutinesVersion
+    ]
+
+    //lifecycle dependencies
+    def lifecycleVersion = "2.4.0"
+    def lifeEventVersion = "1.3.0"
+
+    lifecycleDependencies = [
+            lifecycleViewmodel : "androidx.lifecycle:lifecycle-viewmodel-ktx:" + lifecycleVersion,
+            lifecycleLivedata  : "androidx.lifecycle:lifecycle-livedata-ktx:" + lifecycleVersion,
+            lifecycleRuntime   : "androidx.lifecycle:lifecycle-runtime-ktx:" + lifecycleVersion,
+            lifecycleCommonJava: "androidx.lifecycle:lifecycle-common-java8:" + lifecycleVersion,
+            liveEvent          : "com.github.hadilq:live-event:" + lifeEventVersion
+    ]
+
+    //network dependencies
+    def retrofitVersion = "2.9.0"
+    def okhttpVersion = "4.9.0"
+    def moshi = "1.13.0"
+
+    networkDependencies = [
+            retrofit          : "com.squareup.retrofit2:retrofit:" + retrofitVersion,
+            converterRetrofit : "com.squareup.retrofit2:converter-moshi:" + retrofitVersion,
+            okhttp            : "com.squareup.okhttp3:okhttp:" + okhttpVersion,
+            loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:" + okhttpVersion,
+            moshi             : "com.squareup.moshi:moshi-kotlin:" + moshi
+    ]
+
+    //room dependencies
+    def roomVersion = "2.4.1"
+
+    roomDependence = "androidx.room:room-runtime:" + roomVersion
+    roomKtx = "androidx.room:room-ktx:" + roomVersion
+    kaptRoomDependence = "androidx.room:room-compiler:" + roomVersion
+
+    //test dependencies
+    def junitVersion = "5.8.2"
+    def mockVersion = "1.12.2"
+    def kluentVersion = "1.68"
+
+    testImplementationDependencies = [
+            junitJupiterApi   : "org.junit.jupiter:junit-jupiter-api:" + junitVersion,
+            junitJupiterParams: "org.junit.jupiter:junit-jupiter-params:" + junitVersion,
+            mockk             : "io.mockk:mockk:" + mockVersion,
+            kluent            : "org.amshove.kluent:kluent:" + kluentVersion
+    ]
+
+    testRuntimeDependence = "org.junit.jupiter:junit-jupiter-engine:" + junitVersion
+}

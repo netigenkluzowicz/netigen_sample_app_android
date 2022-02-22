@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+apply from: '../dependencies.gradle'
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "pl.netigen.drumloops.rock"
+        minSdk 23
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+
+
+dependencies {
+    //core dependencies
+    implementation coreDependencies.values()
+
+    //core dependencies
+    implementation coreDependencies.values()
+
+    //ui dependencies
+    implementation uiDependencies.values()
+
+    //navigation dependencies
+    implementation navigationDependencies.values()
+
+    //di dependencies
+    implementation diDependencies.values()
+
+    //coroutines dependencies
+    implementation coroutinesDependencies.values()
+
+    //lifecycle dependencies
+    implementation lifecycleDependencies.values()
+
+    //network dependencies
+    implementation networkDependencies.values()
+
+    //room dependencies
+    implementation roomDependence
+    implementation roomKtx
+    kapt kaptRoomDependence
+
+    //test dependencies
+    testImplementation testImplementationDependencies.values()
+    testRuntimeOnly testRuntimeDependence
+}
