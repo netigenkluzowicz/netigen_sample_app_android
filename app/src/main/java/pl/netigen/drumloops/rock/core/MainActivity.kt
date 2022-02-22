@@ -9,7 +9,7 @@ import pl.netigen.drumloops.rock.databinding.ActivityMainBinding
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding?.root)
+        setContentView(binding.root)
     }
 
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
