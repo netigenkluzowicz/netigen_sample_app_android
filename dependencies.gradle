@@ -30,13 +30,10 @@ ext {
 
     //di dependencies
     def hiltDaggerVersion = "2.41"
-    def hiltLifeCycleVersion = "1.0.0-alpha03"
-    diDependencies = [
-            hiltAndroid        : "com.google.dagger:hilt-android:$hiltDaggerVersion",
-            hiltLifecycle      : "androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifeCycleVersion",
-            hiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:$hiltDaggerVersion",
-            hiltCompiler       : "androidx.hilt:hilt-compiler:$hiltLifeCycleVersion"
-    ]
+
+    hiltAndroid = "com.google.dagger:hilt-android:$hiltDaggerVersion"
+    hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$hiltDaggerVersion"
+    hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltDaggerVersion"
 
     //coroutines dependencies
     def coroutinesVersion = "1.6.0"

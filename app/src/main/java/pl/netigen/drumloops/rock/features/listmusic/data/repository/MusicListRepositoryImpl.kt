@@ -5,7 +5,7 @@ import pl.netigen.drumloops.rock.features.listmusic.domain.model.Audio
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
+
 class MusicListRepositoryImpl @Inject constructor() : MusicListRepository {
     override suspend fun getLikeMusic(): List<Audio> {
         TODO("Not yet implemented")

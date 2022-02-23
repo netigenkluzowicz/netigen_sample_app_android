@@ -1,20 +1,21 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
     repositories {
         google()
         mavenCentral()
     }
-    ext.hilt_version = '2.41'
+    apply from: 'dependencies.gradle'
     dependencies {
         classpath 'com.android.tools.build:gradle:7.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath hiltPlugin
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
-
+apply from: 'dependencies.gradle'
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

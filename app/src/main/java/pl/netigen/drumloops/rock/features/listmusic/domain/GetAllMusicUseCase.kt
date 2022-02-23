@@ -6,7 +6,7 @@ import pl.netigen.drumloops.rock.features.listmusic.domain.model.Audio
 
 class GetAllMusicUseCase(private val musicListRepository: MusicListRepository) :
     UseCase<List<Audio>, Unit>() {
-    override suspend fun action(params: Unit) = musicListRepository.getAllMusic()
+    override suspend fun action(params: Unit) = musicListRepository.getMusic()
 
 
 }

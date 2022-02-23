@@ -52,7 +52,8 @@ dependencies {
     implementation navigationDependencies.values()
 
     //di dependencies
-    implementation diDependencies.values()
+    implementation hiltAndroid
+    kapt hiltAndroidCompiler
 
     //coroutines dependencies
     implementation coroutinesDependencies.values()
