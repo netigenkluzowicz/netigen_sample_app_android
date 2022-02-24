@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import pl.netigen.drumloops.rock.core.data.State
@@ -57,5 +58,6 @@ abstract class BaseFragment<VB : ViewBinding,STATE: State, VM : BaseViewModel<ST
     }
 
     protected abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+
 
 }
