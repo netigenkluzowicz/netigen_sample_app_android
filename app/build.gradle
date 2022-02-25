@@ -37,7 +37,6 @@ android {
 }
 
 
-
 dependencies {
     //core dependencies
     implementation coreDependencies.values()
@@ -64,12 +63,18 @@ dependencies {
     //network dependencies
     implementation networkDependencies.values()
 
+
     //room dependencies
     implementation roomDependence
     implementation roomKtx
     kapt kaptRoomDependence
 
+    //timber
+    implementation timber
+
     //test dependencies
     testImplementation testImplementationDependencies.values()
     testRuntimeOnly testRuntimeDependence
+
+
 }

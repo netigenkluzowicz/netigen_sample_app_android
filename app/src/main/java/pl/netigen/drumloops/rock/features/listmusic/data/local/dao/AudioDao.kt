@@ -1,9 +1,7 @@
 package pl.netigen.drumloops.rock.features.listmusic.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import pl.netigen.drumloops.rock.features.listmusic.data.local.model.AudioCached
 
 @Dao
@@ -11,9 +9,17 @@ interface AudioDao {
     @Query("SELECT * FROM AudioCached")
     suspend fun getAudio(): List<AudioCached>
 
+    @Update
+    suspend fun updateAudio(audio: AudioCached)
+
+    @Query("SELECT * FROM AudioCached WHERE loopId = :id")
+    suspend fun getAudioById(id: Int): AudioCached
+
     @Query("SELECT * FROM AudioCached WHERE isLike = 1")
-    suspend fun getLikeAudio(): List<AudioCached>
+    fun getLikeAudio(): Flow<List<AudioCached>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveAudio(vararg audioCached: AudioCached)
+
+
 }

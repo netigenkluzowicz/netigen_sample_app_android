@@ -1,8 +1,6 @@
 package pl.netigen.drumloops.rock.features.listmusic.domain.model
 
 
-import androidx.room.PrimaryKey
-
 data class Audio(
     val baseBpm: Int,
     val genre: String,

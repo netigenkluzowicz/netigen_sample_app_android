@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import pl.netigen.drumloops.rock.core.data.Item
 import androidx.viewbinding.ViewBinding
+import pl.netigen.drumloops.rock.core.data.Item
 
 
 abstract class BaseAdapter<T : Item, VB : ViewBinding>(

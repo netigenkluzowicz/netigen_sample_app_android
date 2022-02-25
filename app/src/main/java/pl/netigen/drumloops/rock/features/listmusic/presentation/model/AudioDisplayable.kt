@@ -8,12 +8,14 @@ data class AudioDisplayable(
     override val id: Int,
     val genre: String,
     val name: String,
-    val isBuy: Boolean
+    val isBuy: Boolean,
+    val isLike: Boolean
 ) : Item {
     constructor(audio: Audio) : this(
         audio.loopId,
         audio.genre,
         audio.name,
-        audio.isBuy
+        audio.isBuy,
+        audio.isLike
     )
 }
