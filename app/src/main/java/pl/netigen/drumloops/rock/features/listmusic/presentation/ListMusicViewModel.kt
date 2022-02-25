@@ -32,7 +32,6 @@ class ListMusicViewModel @Inject constructor(
     private fun getLikeMusic() {
         viewModelScope.launch {
             getLikeMusicUseCase.execute().distinctUntilChanged().collect {
-                Log.d("majkel","getLikeMusic")
                 setState { state -> state.copy(isLoading = false, likeAudio = it.map { AudioDisplayable(it) }) }
             }
         }
@@ -44,7 +43,6 @@ class ListMusicViewModel @Inject constructor(
                 setState { state -> state.copy(isLoading = false, allAudio = it.map { AudioDisplayable(it) }) }
             }
             result.onFailure {
-                it.message?.let { it1 -> Log.d("majkel" , it1) }
                 setState { state -> state.copy(isLoading = false, error = "") }
             }
         }

@@ -6,16 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pl.netigen.drumloops.rock.core.api.AudioApi
-import pl.netigen.drumloops.rock.core.api.AudioRemote
-import pl.netigen.drumloops.rock.core.api.AudioResponse
-
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-import retrofit2.converter.moshi.MoshiConverterFactory
-
 import javax.inject.Singleton
-
 
 
 @InstallIn(SingletonComponent::class)

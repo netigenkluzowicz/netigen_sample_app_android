@@ -66,7 +66,7 @@ ext {
             converterGson     : "com.squareup.retrofit2:converter-gson:" + retrofitVersion,
             okhttp            : "com.squareup.okhttp3:okhttp:" + okhttpVersion,
             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:" + okhttpVersion,
-            gson             : "com.google.code.gson:gson:" + gson
+            gson: "com.google.code.gson:gson:" + gson
 
     ]
 
@@ -90,4 +90,7 @@ ext {
     ]
 
     testRuntimeDependence = "org.junit.jupiter:junit-jupiter-engine:" + junitVersion
+
+    def timberVersion = "5.0.1"
+    timber = "com.jakewharton.timber:timber:" + timberVersion
 }

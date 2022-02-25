@@ -1,6 +1,7 @@
 package pl.netigen.drumloops.rock.core.base
 
 import kotlinx.coroutines.*
+import kotlin.Result
 
 abstract class UseCase<out Type, in Params> {
 

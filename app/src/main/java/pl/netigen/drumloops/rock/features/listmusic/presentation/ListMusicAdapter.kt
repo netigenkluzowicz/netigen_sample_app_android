@@ -1,7 +1,6 @@
 package pl.netigen.drumloops.rock.features.listmusic.presentation
 
 import android.view.ViewGroup
-import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import pl.netigen.drumloops.rock.R
 import pl.netigen.drumloops.rock.core.base.BaseAdapter
@@ -47,7 +46,7 @@ class ListMusicAdapter(
                     else -> R.drawable.image_1
                 }
                 Glide.with(itemView).load(imageRes).into(image)
-                if(item.isLike){
+                if (item.isLike) {
                     Glide.with(itemView).load(R.drawable.ic_baseline_star_24).into(like)
                 } else {
                     Glide.with(itemView).load(R.drawable.ic_baseline_star_border_24).into(like)

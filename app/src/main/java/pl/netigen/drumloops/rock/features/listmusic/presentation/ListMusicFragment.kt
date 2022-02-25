@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import pl.netigen.drumloops.rock.core.base.BaseFragment
 import pl.netigen.drumloops.rock.core.extension.autoCleaned
-import pl.netigen.drumloops.rock.databinding.ItemMusicBinding
 import pl.netigen.drumloops.rock.databinding.ListMusicFragmentBinding
 import pl.netigen.drumloops.rock.features.listmusic.presentation.model.AudioDisplayable
 import pl.netigen.drumloops.rock.features.listmusic.presentation.model.MusicListDisplayable

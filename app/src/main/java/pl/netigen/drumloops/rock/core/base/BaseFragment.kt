@@ -11,13 +11,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import pl.netigen.drumloops.rock.core.data.State
 import pl.netigen.drumloops.rock.core.extension.autoCleaned
 
-abstract class BaseFragment<VB : ViewBinding,STATE: State, VM : BaseViewModel<STATE>> : Fragment() {
+abstract class BaseFragment<VB : ViewBinding, STATE : State, VM : BaseViewModel<STATE>> : Fragment() {
 
     private var _binding: VB by autoCleaned()
     val binding: VB get() = _binding
@@ -30,7 +29,7 @@ abstract class BaseFragment<VB : ViewBinding,STATE: State, VM : BaseViewModel<ST
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding =  getViewBinding(inflater, container)
+        _binding = getViewBinding(inflater, container)
         return binding.root
     }
 

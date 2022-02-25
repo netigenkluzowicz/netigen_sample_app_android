@@ -1,4 +1,5 @@
 package pl.netigen.drumloops.rock.core.api
+
 import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.JsonClass
 import pl.netigen.drumloops.rock.features.listmusic.domain.model.Audio
