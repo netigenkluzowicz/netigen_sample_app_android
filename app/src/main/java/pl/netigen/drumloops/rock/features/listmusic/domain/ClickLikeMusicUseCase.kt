@@ -7,9 +7,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 
-class GetAllMusicUseCase @Inject constructor(private val musicListRepository: MusicListRepository) :
-    UseCase<List<Audio>, Unit>() {
-    override suspend fun action(params: Unit) = musicListRepository.getMusic()
+class ClickLikeMusicUseCase @Inject constructor(private val musicListRepository: MusicListRepository) :
+    UseCase<Unit, Int>() {
+    override suspend fun action(id: Int) {
+       musicListRepository.setLikeMusic(id)
+    }
 
 
 }

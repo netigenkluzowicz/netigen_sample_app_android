@@ -1,17 +1,21 @@
 package pl.netigen.drumloops.rock.core.api
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.JsonClass
+import pl.netigen.drumloops.rock.features.listmusic.domain.model.Audio
 
-
+@JsonClass(generateAdapter = true)
 data class AudioRemote(
-    @Json(name = "baseBpm") val baseBpm: Int,
-    @Json(name = "genre") val genre: String,
-    @Json(name = "genreColor") val genreColor: String,
-    @Json(name = "loopId") val loopId: Int,
-    @Json(name = "loopSize") val loopSize: Double,
-    @Json(name = "loopUrl") val loopUrl: String,
-    @Json(name = "measure") val measure: String,
-    @Json(name = "name") val name: String,
-    @Json(name = "paymentType") val paymentType: String,
-    @Json(name = "serverId") val serverId: Int,
-    @Json(name = "tempo") val tempo: String
-)
+    @SerializedName("baseBpm") val baseBpm: Int,
+    @SerializedName("genre") val genre: String,
+    @SerializedName("genreColor") val genreColor: String,
+    @SerializedName("loopId") val loopId: Int,
+    @SerializedName("loopSize") val loopSize: Double,
+    @SerializedName("loopUrl") val loopUrl: String,
+    @SerializedName("measure") val measure: String,
+    @SerializedName("name") val name: String,
+    @SerializedName("paymentType") val paymentType: String,
+    @SerializedName("serverId") val serverId: Int,
+    @SerializedName("tempo") val tempo: String
+) {
+    fun toAudio() = Audio(baseBpm, genre, genreColor, loopId, measure, name, paymentType, tempo, isBuy = paymentType.equals("FREE"), isLike = false)
+}

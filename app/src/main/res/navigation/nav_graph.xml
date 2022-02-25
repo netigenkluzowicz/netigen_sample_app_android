@@ -4,7 +4,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/listMusicFragment">
 
-
     <fragment
         android:id="@+id/listMusicFragment"
         android:name="pl.netigen.drumloops.rock.features.listmusic.presentation.ListMusicFragment"
