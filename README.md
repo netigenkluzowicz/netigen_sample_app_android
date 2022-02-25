@@ -48,6 +48,16 @@ We adopt the following naming conventions:
     btn_add and then:
     _pressed / _normal / _disabled / _selected - example button states etc.
     
+2. Layouts
 
+Layout files should match the name of the Android components that they are intended for but moving the top level component name to the beginning. For example, if we are creating a layout for the `SignInActivity`, the name of the layout file should be `activity_sign_in.xml`.
 
+Component        | Prefix      | Class Name                 | Layout Name
+-----------------|-------------|----------------------------|----------------------
+Activity         | `activity_` | MainPageActivity           | `activity_main.xml`
+Fragment         | `fragment_` | DetailsPageFragment        | `fragment_details.xml`
+Dialog           | `dialog_`   | NewItemPageDialogFragment  | `dialog_new_item.xml`
+AdapterView item | `item_`     | PersonViewHolder           | `item_person.xml`
+Custom view layout | `view_`   | ProfileAvatarView          | `view_profile_avatar.xml`
 
+A slightly different case is when we are creating a layout that is going to be inflated by an `Adapter`, e.g to populate a `ListView`. In this case, the name of the layout should start with `item_`.
