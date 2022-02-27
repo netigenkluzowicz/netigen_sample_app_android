@@ -2,14 +2,14 @@ package pl.netigen.drumloops.rock.core.base
 
 import kotlinx.coroutines.*
 
-abstract class UseCase {
+abstract class TypeUseCase<out Type> {
 
-    abstract suspend fun action()
+    abstract suspend fun action(): Type
 
     operator fun invoke(
         scope: CoroutineScope,
         executionDispatcher: CoroutineDispatcher = Dispatchers.IO,
-        onResult: (Result<Unit>) -> Unit = {}
+        onResult: (Result<Type>) -> Unit = {}
     ) {
         scope.launch {
             val result = withContext(executionDispatcher) {

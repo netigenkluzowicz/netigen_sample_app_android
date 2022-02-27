@@ -1,49 +1,72 @@
 package pl.netigen.drumloops.rock.features.listmusic.presentation
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import pl.netigen.drumloops.rock.core.base.BaseViewModel
-import pl.netigen.drumloops.rock.features.listmusic.domain.ClickLikeMusicUseCase
-import pl.netigen.drumloops.rock.features.listmusic.domain.GetAllMusicUseCase
-import pl.netigen.drumloops.rock.features.listmusic.domain.GetLikeMusicUseCase
+import pl.netigen.drumloops.rock.core.base.Resource
+import pl.netigen.drumloops.rock.features.listmusic.domain.usecase.ClickLikeMusicUseCase
+import pl.netigen.drumloops.rock.features.listmusic.domain.usecase.GetAllMusicFromLocalUseCase
+import pl.netigen.drumloops.rock.features.listmusic.domain.usecase.GetLikeMusicUseCase
+import pl.netigen.drumloops.rock.features.listmusic.domain.usecase.GetMusicFromRemoteUseCase
 import pl.netigen.drumloops.rock.features.listmusic.presentation.model.AudioDisplayable
 import pl.netigen.drumloops.rock.features.listmusic.presentation.model.MusicListDisplayable
 import javax.inject.Inject
 
 
+@ExperimentalCoroutinesApi
 @HiltViewModel
 class ListMusicViewModel @Inject constructor(
-    private val getAllMusicUseCase: GetAllMusicUseCase,
+    private val getAllMusicFromLocalUseCase: GetAllMusicFromLocalUseCase,
     private val getLikeMusicUseCase: GetLikeMusicUseCase,
-    private val clickLikeMusicUseCase: ClickLikeMusicUseCase
+    private val clickLikeMusicUseCase: ClickLikeMusicUseCase,
+    private val getMusicFromRemoteUseCase: GetMusicFromRemoteUseCase
 ) : BaseViewModel<MusicListDisplayable>(initialState = MusicListDisplayable()) {
 
+    private var jobLike: Job? = null
+    private var jobAllMusic: Job? = null
+    private var jobSyncMusic: Job? = null
+
     init {
-        setState { state ->
-            state.copy(isLoading = true)
-        }
+        setState { state -> state.copy(isLoading = true) }
         getAllMusic()
         getLikeMusic()
+        synchronizeMusicFromRemote()
+    }
+
+    private fun synchronizeMusicFromRemote() {
+        if (jobSyncMusic?.isActive == true) return
+        jobSyncMusic = viewModelScope.launch {
+            getMusicFromRemoteUseCase.invoke().collect { resource ->
+                when (resource) {
+                    is Resource.Error -> setState { state -> state.copy(error = resource.error) }
+                    is Resource.Loading -> setState { state -> state.copy(isLoading = true) }
+                    is Resource.Success -> setState { state ->
+                        state.copy(allAudio = (resource.data?.map { AudioDisplayable(it) } ?: listOf()))
+                    }
+                }
+
+            }
+        }
     }
 
     private fun getLikeMusic() {
-        viewModelScope.launch {
-            getLikeMusicUseCase.execute().distinctUntilChanged().collect {
+        jobLike?.cancel()
+        jobLike = viewModelScope.launch {
+            getLikeMusicUseCase.invoke().distinctUntilChanged().collect {
                 setState { state -> state.copy(isLoading = false, likeAudio = it.map { AudioDisplayable(it) }) }
             }
         }
     }
 
     private fun getAllMusic() {
-        getAllMusicUseCase.invoke(Unit, viewModelScope) { result ->
-            result.onSuccess {
+        jobAllMusic?.cancel()
+        jobAllMusic = viewModelScope.launch {
+            getAllMusicFromLocalUseCase.invoke().distinctUntilChanged().collect {
                 setState { state -> state.copy(isLoading = false, allAudio = it.map { AudioDisplayable(it) }) }
-            }
-            result.onFailure {
-                setState { state -> state.copy(isLoading = false, error = "") }
             }
         }
     }

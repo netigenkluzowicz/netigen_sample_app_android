@@ -59,9 +59,8 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
         }
 
         val likeMusic = state.likeAudio
-        if (likeMusic.isNotEmpty()) {
-            likeMusicLoaded(likeMusic)
-        }
+        likeMusicLoaded(likeMusic)
+
 
     }
 

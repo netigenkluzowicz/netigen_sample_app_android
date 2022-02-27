@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 @ExperimentalCoroutinesApi
 interface FlowUseCase<T> {
-    fun execute(): Flow<T>
+    suspend fun invoke(): Flow<T>
 }

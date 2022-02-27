@@ -7,7 +7,7 @@ import pl.netigen.drumloops.rock.features.listmusic.data.local.model.AudioCached
 @Dao
 interface AudioDao {
     @Query("SELECT * FROM AudioCached")
-    suspend fun getAudio(): List<AudioCached>
+    fun getAudio(): Flow<List<AudioCached>>
 
     @Update
     suspend fun updateAudio(audio: AudioCached)
@@ -19,7 +19,7 @@ interface AudioDao {
     fun getLikeAudio(): Flow<List<AudioCached>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun saveAudio(vararg audioCached: AudioCached)
+    fun saveAudio(vararg audioCached: AudioCached)
 
 
 }
