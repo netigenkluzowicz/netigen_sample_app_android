@@ -2,7 +2,6 @@ package pl.netigen.drumloops.rock.features.listmusic.presentation
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -17,7 +16,7 @@ import pl.netigen.drumloops.rock.features.listmusic.presentation.model.MusicList
 import javax.inject.Inject
 
 
-@ExperimentalCoroutinesApi
+
 @HiltViewModel
 class ListMusicViewModel @Inject constructor(
     private val getAllMusicFromLocalUseCase: GetAllMusicFromLocalUseCase,

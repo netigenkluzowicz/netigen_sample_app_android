@@ -62,7 +62,6 @@ ext {
 
     networkDependencies = [
             retrofit          : "com.squareup.retrofit2:retrofit:" + retrofitVersion,
-            converterRetrofit : "com.squareup.retrofit2:converter-moshi:" + retrofitVersion,
             converterGson     : "com.squareup.retrofit2:converter-gson:" + retrofitVersion,
             okhttp            : "com.squareup.okhttp3:okhttp:" + okhttpVersion,
             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:" + okhttpVersion,
@@ -72,7 +71,6 @@ ext {
 
     //room dependencies
     def roomVersion = "2.4.1"
-
     roomDependence = "androidx.room:room-runtime:" + roomVersion
     roomKtx = "androidx.room:room-ktx:" + roomVersion
     kaptRoomDependence = "androidx.room:room-compiler:" + roomVersion

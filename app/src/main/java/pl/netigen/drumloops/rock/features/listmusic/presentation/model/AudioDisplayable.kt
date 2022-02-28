@@ -9,7 +9,7 @@ data class AudioDisplayable(
     val genre: String,
     val name: String,
     val isBuy: Boolean,
-    val isLike: Boolean
+    val isLike: Boolean,
 ) : Item {
     constructor(audio: Audio) : this(
         audio.loopId,

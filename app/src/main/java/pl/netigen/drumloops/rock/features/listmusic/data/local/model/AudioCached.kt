@@ -17,7 +17,7 @@ data class AudioCached(
     val paymentType: String,
     val tempo: String,
     val isBuy: Boolean,
-    val isLike: Boolean
+    val isLike: Boolean,
 ) {
     constructor(audio: Audio) : this(
         audio.loopId,

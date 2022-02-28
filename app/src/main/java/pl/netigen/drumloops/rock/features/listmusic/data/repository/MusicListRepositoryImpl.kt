@@ -20,20 +20,13 @@ class MusicListRepositoryImpl @Inject constructor(private val audioDao: AudioDao
     override fun getMusicFromLocal() = audioDao.getAudio().map { audio -> audio.map { it.toAudio() } }
 
     override suspend fun getMusicFromRemote() = networkBoundResource(
-        query = {
-            getMusicFromLocal()
-        },
-        fetch = {
-            audioApi.getMusics()
-        },
-        saveFetchResult = { list ->
-            saveMusicToLocal(list)
-        },
+        query = { getMusicFromLocal() },
+        fetch = { audioApi.getMusics() },
+        saveFetchResult = { list -> saveMusicToLocal(list) },
         emitValue = false,
         shouldFetch = { true },
         coroutineDispatcher = Dispatchers.IO
     )
-
 
     override suspend fun saveMusicToLocal(list: AudioResponse) {
         list.map { it.toAudio() }.map { AudioCached(it) }.toTypedArray().let {

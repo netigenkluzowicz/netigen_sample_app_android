@@ -11,5 +11,5 @@ data class Audio(
     val paymentType: String,
     val tempo: String,
     val isBuy: Boolean,
-    val isLike: Boolean
+    val isLike: Boolean,
 )
