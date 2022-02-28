@@ -7,29 +7,48 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import pl.netigen.drumloops.rock.core.data.State
+import pl.netigen.drumloops.rock.core.extension.autoCleaned
 
-abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
+abstract class BaseFragment<VB : ViewBinding, STATE : State, VM : BaseViewModel<STATE>> : Fragment() {
 
-    private var _binding: VB? = null
-    val binding get() = _binding
+    private var _binding: VB by autoCleaned()
+    val binding: VB get() = _binding
 
-    protected abstract val viewModelApp: VM
+    protected abstract val viewModel: VM
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding =  getViewBinding(inflater, container)
-        return binding?.root
+        _binding = getViewBinding(inflater, container)
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    abstract fun initView()
+    abstract fun render(state: STATE)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        observeState()
     }
+
+    private fun observeState() {
+        viewModel.state
+            .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+            .onEach { state -> render(state) }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
 
     fun applicationContext(): Context = requireActivity().applicationContext
 
@@ -38,5 +57,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
     }
 
     protected abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
+
 
 }

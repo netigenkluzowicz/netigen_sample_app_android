@@ -8,6 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pl.netigen.drumloops.rock.core.database.AppDatabase
+import pl.netigen.drumloops.rock.features.listmusic.data.local.dao.AudioDao
 import javax.inject.Singleton
 
 @Module
@@ -19,5 +20,10 @@ internal class DatabaseProvider {
         return AppDatabase.getDatabase(app)
     }
 
+    @Singleton
+    @Provides
+    fun audioDao(db: AppDatabase): AudioDao {
+        return db.audioDao()
+    }
 
 }

@@ -30,13 +30,10 @@ ext {
 
     //di dependencies
     def hiltDaggerVersion = "2.41"
-    def hiltLifeCycleVersion = "1.0.0-alpha03"
-    diDependencies = [
-            hiltAndroid        : "com.google.dagger:hilt-android:$hiltDaggerVersion",
-            hiltLifecycle      : "androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifeCycleVersion",
-            hiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:$hiltDaggerVersion",
-            hiltCompiler       : "androidx.hilt:hilt-compiler:$hiltLifeCycleVersion"
-    ]
+
+    hiltAndroid = "com.google.dagger:hilt-android:$hiltDaggerVersion"
+    hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$hiltDaggerVersion"
+    hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:$hiltDaggerVersion"
 
     //coroutines dependencies
     def coroutinesVersion = "1.6.0"
@@ -61,19 +58,19 @@ ext {
     //network dependencies
     def retrofitVersion = "2.9.0"
     def okhttpVersion = "4.9.0"
-    def moshi = "1.13.0"
+    def gson = "2.9.0"
 
     networkDependencies = [
             retrofit          : "com.squareup.retrofit2:retrofit:" + retrofitVersion,
-            converterRetrofit : "com.squareup.retrofit2:converter-moshi:" + retrofitVersion,
+            converterGson     : "com.squareup.retrofit2:converter-gson:" + retrofitVersion,
             okhttp            : "com.squareup.okhttp3:okhttp:" + okhttpVersion,
             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:" + okhttpVersion,
-            moshi             : "com.squareup.moshi:moshi-kotlin:" + moshi
+            gson              : "com.google.code.gson:gson:" + gson
+
     ]
 
     //room dependencies
     def roomVersion = "2.4.1"
-
     roomDependence = "androidx.room:room-runtime:" + roomVersion
     roomKtx = "androidx.room:room-ktx:" + roomVersion
     kaptRoomDependence = "androidx.room:room-compiler:" + roomVersion
@@ -91,4 +88,7 @@ ext {
     ]
 
     testRuntimeDependence = "org.junit.jupiter:junit-jupiter-engine:" + junitVersion
+
+    def timberVersion = "5.0.1"
+    timber = "com.jakewharton.timber:timber:" + timberVersion
 }

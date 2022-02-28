@@ -4,14 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import pl.netigen.drumloops.rock.features.listmusic.data.local.dao.AudioDao
+import pl.netigen.drumloops.rock.features.listmusic.data.local.model.AudioCached
 
-@TypeConverters(Converters::class)
-@Database(entities = [], version = 1)
+
+@Database(entities = [AudioCached::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
+
+    abstract fun audioDao(): AudioDao
+
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
