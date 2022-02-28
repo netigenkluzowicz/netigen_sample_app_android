@@ -1,11 +1,12 @@
 package pl.netigen.sampleapp.core.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import pl.netigen.core.main.CoreMainActivity
+import pl.netigen.coreapi.main.ICoreViewModelsFactory
 
 
-abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding> : CoreMainActivity() {
 
     protected lateinit var binding: VB
 
@@ -14,9 +15,8 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         binding = getViewBinding()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
+
+    override val viewModelFactory: ICoreViewModelsFactory by lazy { CoreVMFactory(this) }
 
     abstract fun getViewBinding(): VB
 }
