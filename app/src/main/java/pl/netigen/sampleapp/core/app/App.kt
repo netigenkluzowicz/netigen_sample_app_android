@@ -23,6 +23,6 @@ class App : Application() {
     }
 
     companion object {
-        const val TAG = "sampleApp"
+        const val TAG = "netigenDebugTimber"
     }
 }
