@@ -18,19 +18,33 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "shop"
+
+    productFlavors {
+        play {
+            dimension "shop"
+        }
+        huawei {
+            dimension "shop"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
         viewBinding true
     }
@@ -38,6 +52,11 @@ android {
 
 
 dependencies {
+    //apiAndroid dependencies
+    implementation coreApiAndroid
+    implementation gmsApiAndroid
+    huaweiImplementation hmsApiAndroid
+
     //core dependencies
     implementation coreDependencies.values()
 
