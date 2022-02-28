@@ -9,8 +9,20 @@ import timber.log.Timber
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
+        setupTimber()
+    }
+
+    private fun setupTimber() {
         if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree());
+            Timber.plant(object : Timber.DebugTree() {
+                override fun createStackElementTag(element: StackTraceElement): String {
+                    return "$TAG.${element.className.substringAfterLast(".")}.${element.methodName}"
+                }
+            })
         }
+    }
+
+    companion object {
+        const val TAG = "sampleApp"
     }
 }
