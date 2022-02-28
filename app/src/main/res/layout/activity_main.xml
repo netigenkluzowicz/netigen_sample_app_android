@@ -12,9 +12,29 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/adsBorder"
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/nav_graph"
             tools:ignore="FragmentTagUsage" />
 
+    <LinearLayout
+            android:id="@+id/adsBorder"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="#1700FF"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/adsLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    <RelativeLayout
+            android:id="@+id/adsLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/black"
+            android:minHeight="55dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
