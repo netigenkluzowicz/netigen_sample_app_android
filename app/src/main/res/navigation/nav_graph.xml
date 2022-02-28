@@ -6,6 +6,6 @@
 
     <fragment
             android:id="@+id/listMusicFragment"
-            android:name="pl.netigen.drumloops.rock.features.listmusic.presentation.ListMusicFragment"
+            android:name="pl.netigen.sampleapp.listmusic.presentation.ListMusicFragment"
             android:label="ListMusicFragment" />
 </navigation>
