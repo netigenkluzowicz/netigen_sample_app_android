@@ -15,6 +15,9 @@ android {
         versionCode generateVersionCode()
         versionName generateVersionName()
 
+        // Sample AdMob app ID:
+        manifestPlaceholders = [admobId: "ca-app-pub-3940256099942544~3347511713"]
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
