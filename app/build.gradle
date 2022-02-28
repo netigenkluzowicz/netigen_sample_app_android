@@ -9,7 +9,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "pl.netigen.drumloops.rock"
+        applicationId "pl.netigen.frequencygenerator"
         minSdk 23
         targetSdk 30
         versionCode generateVersionCode()
