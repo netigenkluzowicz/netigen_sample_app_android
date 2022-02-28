@@ -2,7 +2,7 @@ package pl.netigen.drumloops.rock.core.base
 
 import kotlinx.coroutines.*
 
-abstract class TypeParamsUseCase<out Type, in Params> {
+abstract class UseCase<out Type, in Params> {
 
     abstract suspend fun action(params: Params): Type
 
