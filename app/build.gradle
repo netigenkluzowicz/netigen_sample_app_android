@@ -9,13 +9,23 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "pl.netigen.drumloops.rock"
+        applicationId "pl.netigen.frequencygenerator"
         minSdk 23
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
+        versionCode generateVersionCode()
+        versionName generateVersionName()
+
+        // Sample AdMob app ID:
+        manifestPlaceholders = [admobId: "ca-app-pub-3940256099942544~3347511713"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "shop"
+
+    productFlavors {
+        gms { dimension "shop" }
+        hms { dimension "shop" }
     }
 
     buildTypes {
@@ -24,20 +34,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    buildFeatures {
-        viewBinding true
-    }
+
+    kotlinOptions { jvmTarget = '1.8' }
+
+    buildFeatures { viewBinding true }
 }
 
 
 dependencies {
+    //apiAndroid dependencies
+    implementation coreApiAndroid
+    gmsImplementation gmsApiAndroid
+    hmsImplementation hmsApiAndroid
+
     //core dependencies
     implementation coreDependencies.values()
 

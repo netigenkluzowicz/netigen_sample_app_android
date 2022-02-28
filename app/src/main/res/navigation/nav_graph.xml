@@ -2,10 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/nav_graph"
-        app:startDestination="@id/listMusicFragment">
+        app:startDestination="@id/splashFragment">
+
+    <fragment
+            android:id="@+id/splashFragment"
+            android:name="pl.netigen.sampleapp.splash.SplashFragment"
+            android:label="SplashFragment">
+        <action
+                android:id="@+id/action_splashFragment_to_musicListFragment"
+                app:destination="@id/listMusicFragment"
+                app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
             android:id="@+id/listMusicFragment"
-            android:name="pl.netigen.drumloops.rock.features.listmusic.presentation.ListMusicFragment"
+            android:name="pl.netigen.sampleapp.listmusic.presentation.ListMusicFragment"
             android:label="ListMusicFragment" />
 </navigation>
