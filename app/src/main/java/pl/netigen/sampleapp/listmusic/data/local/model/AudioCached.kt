@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import pl.netigen.sampleapp.listmusic.domain.model.Audio
 
-
 @Entity
 data class AudioCached(
     @PrimaryKey
@@ -37,5 +36,4 @@ data class AudioCached(
     fun toAudio() = Audio(
         baseBpm, genre, genreColor, loopId, measure, name, paymentType, tempo, isBuy, isLike
     )
-
 }

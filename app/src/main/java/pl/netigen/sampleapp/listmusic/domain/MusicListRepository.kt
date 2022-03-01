@@ -5,7 +5,6 @@ import pl.netigen.sampleapp.core.api.AudioResponse
 import pl.netigen.sampleapp.core.base.Resource
 import pl.netigen.sampleapp.listmusic.domain.model.Audio
 
-
 interface MusicListRepository {
     fun getLikeMusic(): Flow<List<Audio>>
     fun getMusicFromLocal(): Flow<List<Audio>>

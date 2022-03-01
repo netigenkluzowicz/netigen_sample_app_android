@@ -15,8 +15,6 @@ import pl.netigen.sampleapp.listmusic.presentation.model.AudioDisplayable
 import pl.netigen.sampleapp.listmusic.presentation.model.MusicListDisplayable
 import javax.inject.Inject
 
-
-
 @HiltViewModel
 class ListMusicViewModel @Inject constructor(
     private val getAllMusicFromLocalUseCase: GetAllMusicFromLocalUseCase,
@@ -47,7 +45,6 @@ class ListMusicViewModel @Inject constructor(
                         state.copy(allAudio = (resource.data?.map { AudioDisplayable(it) } ?: listOf()))
                     }
                 }
-
             }
         }
     }
@@ -75,5 +72,4 @@ class ListMusicViewModel @Inject constructor(
             clickLikeMusicUseCase.action(id)
         }
     }
-
 }

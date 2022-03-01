@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import pl.netigen.sampleapp.core.data.Item
 
-
 abstract class BaseAdapter<T : Item, VB : ViewBinding>(
     diffCallback: ViewBindingDiffUtilCallback<T>
 ) : ListAdapter<T, BaseAdapter.ViewBindingViewHolder<T, VB>>(diffCallback) {
@@ -21,7 +20,6 @@ abstract class BaseAdapter<T : Item, VB : ViewBinding>(
     ) {
         holder.bind(item = getItem(position), payloads = payloads)
     }
-
 
     protected val ViewGroup.layoutInflater: LayoutInflater
         get() = LayoutInflater.from(this.context)

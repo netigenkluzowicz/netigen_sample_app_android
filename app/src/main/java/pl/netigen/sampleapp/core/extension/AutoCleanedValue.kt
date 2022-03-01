@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-
 class AutoCleanedValue<T : Any>(
     fragment: Fragment,
     private val initializer: (() -> T)?,

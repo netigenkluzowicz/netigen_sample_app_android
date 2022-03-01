@@ -10,7 +10,6 @@ import pl.netigen.coreapi.payments.IPayments
 import pl.netigen.drumloops.rock.BuildConfig
 import pl.netigen.sampleapp.flavour.FlavoursConst
 
-
 class CoreVMFactory(override val coreMainActivity: CoreMainActivity) : CoreViewModelsFactory(coreMainActivity) {
 
     override val appConfig by lazy {
@@ -35,6 +34,4 @@ class CoreVMFactory(override val coreMainActivity: CoreMainActivity) : CoreViewM
 
     override val payments: IPayments
         get() = FlavoursConst.getPaymentsImpl(coreMainActivity, appConfig)
-
-
 }

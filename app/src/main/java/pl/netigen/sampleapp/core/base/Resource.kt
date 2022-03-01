@@ -12,9 +12,5 @@ sealed class Resource<T>(
         fun <T> success(data: T): Resource<T> = Success(data)
         fun <T> error(error: String): Resource<T> = Error(error)
         fun <T> loading(): Resource<T> = Loading()
-
-
     }
-
 }
-
