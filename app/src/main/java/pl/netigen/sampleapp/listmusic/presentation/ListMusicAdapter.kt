@@ -3,10 +3,10 @@ package pl.netigen.sampleapp.listmusic.presentation
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import pl.netigen.drumloops.rock.R
+import pl.netigen.drumloops.rock.databinding.ItemMusicBinding
 import pl.netigen.sampleapp.core.base.BaseAdapter
 import pl.netigen.sampleapp.core.base.GenericItemDiffUtil
 import pl.netigen.sampleapp.core.data.Item
-import pl.netigen.drumloops.rock.databinding.ItemMusicBinding
 import pl.netigen.sampleapp.listmusic.presentation.model.AudioDisplayable
 
 class ListMusicAdapter(
@@ -32,7 +32,6 @@ class ListMusicAdapter(
             binding.like.setOnClickListener {
                 onMusicLikeClicked(getItem(bindingAdapterPosition) as AudioDisplayable)
             }
-
         }
 
         override fun bind(item: Item) {
@@ -52,7 +51,6 @@ class ListMusicAdapter(
                     Glide.with(itemView).load(R.drawable.ic_baseline_star_border_24).into(like)
                 }
             }
-
         }
     }
 }

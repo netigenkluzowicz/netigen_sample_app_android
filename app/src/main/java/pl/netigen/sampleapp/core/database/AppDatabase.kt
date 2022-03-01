@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 import pl.netigen.sampleapp.listmusic.data.local.dao.AudioDao
 import pl.netigen.sampleapp.listmusic.data.local.model.AudioCached
 
-
 @Database(entities = [AudioCached::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -42,7 +41,5 @@ abstract class AppDatabase : RoomDatabase() {
     }
 
     suspend fun initDatabase(context: Context) {
-
     }
-
 }

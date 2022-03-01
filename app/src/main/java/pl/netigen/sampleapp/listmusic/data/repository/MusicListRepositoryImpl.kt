@@ -12,7 +12,6 @@ import pl.netigen.sampleapp.listmusic.domain.MusicListRepository
 import pl.netigen.sampleapp.listmusic.domain.model.Audio
 import javax.inject.Inject
 
-
 class MusicListRepositoryImpl @Inject constructor(private val audioDao: AudioDao, private val audioApi: AudioApi) : MusicListRepository {
 
     override fun getLikeMusic(): Flow<List<Audio>> = audioDao.getLikeAudio().map { audio -> audio.map { it.toAudio() } }
@@ -38,5 +37,4 @@ class MusicListRepositoryImpl @Inject constructor(private val audioDao: AudioDao
         val audioById = audioDao.getAudioById(id)
         audioDao.updateAudio(audioById.copy(isLike = !audioById.isLike))
     }
-
 }

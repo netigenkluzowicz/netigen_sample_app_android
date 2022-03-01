@@ -5,7 +5,6 @@ import androidx.viewbinding.ViewBinding
 import pl.netigen.core.main.CoreMainActivity
 import pl.netigen.coreapi.main.ICoreViewModelsFactory
 
-
 abstract class BaseActivity<VB : ViewBinding> : CoreMainActivity() {
 
     protected lateinit var binding: VB
@@ -14,7 +13,6 @@ abstract class BaseActivity<VB : ViewBinding> : CoreMainActivity() {
         super.onCreate(savedInstanceState)
         binding = getViewBinding()
     }
-
 
     override val viewModelFactory: ICoreViewModelsFactory by lazy { CoreVMFactory(this) }
 

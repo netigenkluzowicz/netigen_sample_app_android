@@ -1,8 +1,6 @@
 package pl.netigen.sampleapp.core.di
 
 import android.app.Application
-
-
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,5 +23,4 @@ internal class DatabaseProvider {
     fun audioDao(db: AppDatabase): AudioDao {
         return db.audioDao()
     }
-
 }

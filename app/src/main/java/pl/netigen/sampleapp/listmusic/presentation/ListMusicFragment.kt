@@ -8,12 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import pl.netigen.drumloops.rock.databinding.ListMusicFragmentBinding
 import pl.netigen.sampleapp.core.base.BaseFragment
 import pl.netigen.sampleapp.core.extension.autoCleaned
-import pl.netigen.drumloops.rock.databinding.ListMusicFragmentBinding
 import pl.netigen.sampleapp.listmusic.presentation.model.AudioDisplayable
 import pl.netigen.sampleapp.listmusic.presentation.model.MusicListDisplayable
-
 
 @AndroidEntryPoint
 class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDisplayable, ListMusicViewModel>() {
@@ -60,8 +59,6 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
 
         val likeMusic = state.likeAudio
         likeMusicLoaded(likeMusic)
-
-
     }
 
     private fun likeMusicLoaded(musicList: List<AudioDisplayable>) {

@@ -1,6 +1,5 @@
 package pl.netigen.sampleapp.listmusic.domain.model
 
-
 data class Audio(
     val baseBpm: Int,
     val genre: String,

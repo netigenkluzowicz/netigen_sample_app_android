@@ -1,6 +1,5 @@
 package pl.netigen.sampleapp.core.base
 
-
 import pl.netigen.sampleapp.core.data.Item
 
 object GenericItemDiffUtil : ViewBindingDiffUtilCallback<Item>() {

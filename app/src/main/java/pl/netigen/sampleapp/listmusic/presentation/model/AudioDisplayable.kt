@@ -1,6 +1,5 @@
 package pl.netigen.sampleapp.listmusic.presentation.model
 
-
 import pl.netigen.sampleapp.core.data.Item
 import pl.netigen.sampleapp.listmusic.domain.model.Audio
 

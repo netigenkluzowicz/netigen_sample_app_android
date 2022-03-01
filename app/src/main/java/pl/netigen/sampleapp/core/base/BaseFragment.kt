@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +22,6 @@ abstract class BaseFragment<VB : ViewBinding, STATE : State, VM : BaseViewModel<
     val binding: VB get() = _binding
 
     protected abstract val viewModel: VM
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +48,6 @@ abstract class BaseFragment<VB : ViewBinding, STATE : State, VM : BaseViewModel<
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-
     fun applicationContext(): Context = requireActivity().applicationContext
 
     fun showToast(message: String) {
@@ -58,6 +55,4 @@ abstract class BaseFragment<VB : ViewBinding, STATE : State, VM : BaseViewModel<
     }
 
     protected abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
-
-
 }
