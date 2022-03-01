@@ -8,6 +8,7 @@ import pl.netigen.coreapi.gdpr.IGDPRConsent
 import pl.netigen.coreapi.main.Store
 import pl.netigen.coreapi.payments.IPayments
 import pl.netigen.drumloops.rock.BuildConfig
+
 import pl.netigen.sampleapp.flavour.FlavoursConst
 
 class CoreVMFactory(override val coreMainActivity: CoreMainActivity) : CoreViewModelsFactory(coreMainActivity) {

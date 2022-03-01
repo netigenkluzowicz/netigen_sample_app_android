@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pl.netigen.sampleapp.core.database.AppDatabase
-import pl.netigen.sampleapp.listmusic.data.local.dao.AudioDao
+import pl.netigen.sampleapp.features.musiclist.data.local.dao.MusicDao
 import javax.inject.Singleton
 
 @Module
@@ -20,7 +20,7 @@ internal class DatabaseProvider {
 
     @Singleton
     @Provides
-    fun audioDao(db: AppDatabase): AudioDao {
+    fun audioDao(db: AppDatabase): MusicDao {
         return db.audioDao()
     }
 }

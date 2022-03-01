@@ -7,13 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import pl.netigen.sampleapp.listmusic.data.local.dao.AudioDao
-import pl.netigen.sampleapp.listmusic.data.local.model.AudioCached
+import pl.netigen.sampleapp.features.musiclist.data.local.dao.MusicDao
+import pl.netigen.sampleapp.features.musiclist.data.local.model.MusicCached
 
-@Database(entities = [AudioCached::class], version = 1)
+@Database(entities = [MusicCached::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun audioDao(): AudioDao
+    abstract fun audioDao(): MusicDao
 
     companion object {
         @Volatile
