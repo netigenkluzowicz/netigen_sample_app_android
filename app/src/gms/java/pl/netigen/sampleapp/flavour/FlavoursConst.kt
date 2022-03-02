@@ -18,8 +18,17 @@ object FlavoursConst {
     const val NO_ADS_KEY = ".noads"
     const val SUBSCRIPTION_1 = ".subs_01"
 
-    fun getPaymentsImpl(coreMainActivity: CoreMainActivity, appConfig: AppConfig): IPayments =
-        GMSPayments(coreMainActivity, inDebugMode = appConfig.inDebugMode)
+    fun getPaymentsImpl(coreMainActivity: CoreMainActivity, appConfig: AppConfig): IPayments {
+        val inAppSkuList = mutableListOf(
+            coreMainActivity.packageName + NO_ADS_KEY,
+            coreMainActivity.packageName + SUBSCRIPTION_1,
+        )
+        val inAppSkuListNoAds = listOf(
+            coreMainActivity.packageName + NO_ADS_KEY,
+            coreMainActivity.packageName + SUBSCRIPTION_1,
+        )
+        return GMSPayments(coreMainActivity, inAppSkuList, inAppSkuListNoAds, inAppSkuList, inDebugMode = appConfig.inDebugMode)
+    }
 
     fun getAdsImpl(coreMainActivity: CoreMainActivity, appConfig: AppConfig) = AdMobAds(coreMainActivity, appConfig)
     fun getGDPRConsentImpl(coreMainActivity: CoreMainActivity) = GDPRConsentImpl(coreMainActivity)
