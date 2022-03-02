@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import pl.netigen.core.splash.CoreSplashFragment
 import pl.netigen.drumloops.rock.R
 
-
 import pl.netigen.extensions.safeNavigate
 import timber.log.Timber
 

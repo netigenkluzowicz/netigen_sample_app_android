@@ -16,7 +16,6 @@ import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicListDispl
 import pl.netigen.sampleapp.flavour.FlavoursConst.NO_ADS_KEY
 import pl.netigen.sampleapp.flavour.FlavoursConst.SUBSCRIPTION_1
 
-
 @AndroidEntryPoint
 class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDisplayable, ListMusicViewModel>() {
 
@@ -50,7 +49,6 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
     }
 
     private fun onLikeMusicClick(musicDisplayable: MusicDisplayable) = viewModel.clickLikeMusic(musicDisplayable.id)
-
 
     override fun render(state: MusicListDisplayable) {
         val error = state.error
@@ -89,5 +87,4 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
     }
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) = ListMusicFragmentBinding.inflate(inflater, container, false)
-
 }

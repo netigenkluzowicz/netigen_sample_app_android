@@ -1,11 +1,8 @@
 package pl.netigen.sampleapp.core
 
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import dagger.hilt.android.AndroidEntryPoint
 import pl.netigen.drumloops.rock.databinding.ActivityMainBinding
-
 
 import pl.netigen.sampleapp.core.base.BaseActivity
 import pl.netigen.sampleapp.core.extension.gone

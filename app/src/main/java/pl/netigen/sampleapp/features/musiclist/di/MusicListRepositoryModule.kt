@@ -8,7 +8,6 @@ import dagger.hilt.android.scopes.ActivityRetainedScoped
 import pl.netigen.sampleapp.features.musiclist.data.repository.MusicListRepositoryImpl
 import pl.netigen.sampleapp.features.musiclist.domain.MusicListRepository
 
-
 @InstallIn(ActivityRetainedComponent::class)
 @Module
 abstract class MusicListRepositoryModule {
