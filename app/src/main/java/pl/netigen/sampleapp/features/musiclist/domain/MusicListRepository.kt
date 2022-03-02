@@ -11,5 +11,6 @@ interface MusicListRepository {
     suspend fun getMusicFromRemote(): Flow<Resource<List<Music>>>
     suspend fun saveMusicToLocal(list: MusicResponse)
     suspend fun setLikeMusic(id: Int)
-    suspend fun setBuyMusic(params: Boolean)
+    suspend fun setBuyAllMusic(params: Boolean)
+    suspend fun setBuyMusic(params: Int)
 }
