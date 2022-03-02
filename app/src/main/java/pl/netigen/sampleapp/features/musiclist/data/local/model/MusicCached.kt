@@ -38,7 +38,6 @@ data class MusicCached(
         const val FREE = "FREE"
     }
 
-
     @Retention(AnnotationRetention.SOURCE)
     @StringDef(PREMIUM, FREE)
     annotation class PaymentType

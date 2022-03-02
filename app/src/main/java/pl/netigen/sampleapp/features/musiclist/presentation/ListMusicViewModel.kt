@@ -76,6 +76,5 @@ class ListMusicViewModel @Inject constructor(
             setState { state -> state.copy(isUserPremium = noAdsActive) }
             setBuyMusicUseCase.action(noAdsActive)
         }
-
     }
 }

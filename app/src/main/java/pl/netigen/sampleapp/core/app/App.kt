@@ -4,7 +4,6 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import pl.netigen.drumloops.rock.BuildConfig
 
-
 import timber.log.Timber
 
 @HiltAndroidApp
