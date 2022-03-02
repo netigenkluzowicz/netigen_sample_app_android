@@ -5,6 +5,7 @@ root = true
 disabled_rules = no-wildcard-imports, import-ordering
 charset = utf-8
 insert_final_newline = true
+ij_kotlin_allow_trailing_comma = true
 max_line_length = 150
 end_of_line = crlf
 

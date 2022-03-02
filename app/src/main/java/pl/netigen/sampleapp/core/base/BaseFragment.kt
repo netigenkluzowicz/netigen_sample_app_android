@@ -56,9 +56,7 @@ abstract class BaseFragment<VB : ViewBinding, STATE : State, VM : BaseViewModel<
 
     fun applicationContext(): Context = requireActivity().applicationContext
 
-    fun showToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-    }
+    fun showToast(message: String) = Toast.makeText(context, message, Toast.LENGTH_LONG).show()
 
     protected abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 }

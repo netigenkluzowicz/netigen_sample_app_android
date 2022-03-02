@@ -13,11 +13,7 @@ abstract class UseCase<out Type, in Params> {
         onResult: (Result<Type>) -> Unit = {}
     ) {
         scope.launch {
-            val result = withContext(executionDispatcher) {
-                kotlin.runCatching {
-                    action(params)
-                }
-            }
+            val result = withContext(executionDispatcher) { kotlin.runCatching { action(params) } }
             onResult(result)
         }
     }
