@@ -100,5 +100,4 @@ ext {
     coreApiAndroid = "com.github.netigenkluzowicz.api_android:core:" + apiAndroidVersion
     gmsApiAndroid = "com.github.netigenkluzowicz.api_android:gms:" + apiAndroidVersion
     hmsApiAndroid = "com.github.netigenkluzowicz.api_android:hms: " + apiAndroidVersion
-    crossAdsApiAndroid = "com.github.netigenkluzowicz.api_android:cross-ads:" + apiAndroidVersion
 }

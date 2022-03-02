@@ -49,7 +49,6 @@ android {
 dependencies {
     //apiAndroid dependencies
     implementation coreApiAndroid
-    implementation crossAdsApiAndroid
     gmsImplementation gmsApiAndroid
     hmsImplementation hmsApiAndroid
 
