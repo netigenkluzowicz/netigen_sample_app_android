@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/splashFragment"
-            android:name="pl.netigen.sampleapp.splash.SplashFragment"
+            android:name="pl.netigen.sampleapp.features.splash.SplashFragment"
             android:label="SplashFragment">
         <action
                 android:id="@+id/action_splashFragment_to_musicListFragment"
@@ -16,6 +16,6 @@
 
     <fragment
             android:id="@+id/listMusicFragment"
-            android:name="pl.netigen.sampleapp.listmusic.presentation.ListMusicFragment"
+            android:name="pl.netigen.sampleapp.features.musiclist.presentation.ListMusicFragment"
             android:label="ListMusicFragment" />
 </navigation>

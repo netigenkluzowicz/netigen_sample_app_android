@@ -26,9 +26,9 @@ private String generateVersionName() {
 }
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-ext.versionMajor = 3
+ext.versionMajor = 7
 ext.versionMinor = 4
-ext.versionPatch = 4
+ext.versionPatch = 6
 
 apply from: 'dependencies.gradle'
 task clean(type: Delete) {

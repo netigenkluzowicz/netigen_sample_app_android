@@ -34,6 +34,7 @@ abstract class BaseFragment<VB : ViewBinding, STATE : State, VM : BaseViewModel<
 
     abstract fun initView()
     abstract fun render(state: STATE)
+    abstract fun noAdsActive(noAdsActive: Boolean)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,6 +46,11 @@ abstract class BaseFragment<VB : ViewBinding, STATE : State, VM : BaseViewModel<
         viewModel.state
             .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
             .onEach { state -> render(state) }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
+
+        coreMainVM.noAdsActive
+            .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+            .onEach { noAdsActive -> noAdsActive(noAdsActive) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 

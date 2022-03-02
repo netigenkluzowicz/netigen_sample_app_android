@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import pl.netigen.sampleapp.core.api.AudioApi
+import pl.netigen.sampleapp.core.api.MusicApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -14,12 +14,12 @@ import javax.inject.Singleton
 class ApiModule {
     @Singleton
     @Provides
-    fun provideRickAndMortyService(): AudioApi {
+    fun provideRickAndMortyService(): MusicApi {
 
         return Retrofit.Builder()
             .baseUrl("https://strapi-drumloops.netigen.eu/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(AudioApi::class.java)
+            .create(MusicApi::class.java)
     }
 }
