@@ -25,7 +25,7 @@ class MusicListRepositoryImpl @Inject constructor(private val musicDao: MusicDao
         saveFetchResult = { list -> saveMusicToLocal(list) },
         emitValue = false,
         shouldFetch = { true },
-        coroutineDispatcher = Dispatchers.IO
+        coroutineDispatcher = Dispatchers.IO,
     )
 
     override suspend fun saveMusicToLocal(list: MusicResponse) {

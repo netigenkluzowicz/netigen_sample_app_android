@@ -14,7 +14,7 @@ import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicDisplayab
 
 class ListMusicAdapter(
     private val onMusicClicked: (MusicDisplayable) -> Unit,
-    private val onMusicLikeClicked: (MusicDisplayable) -> Unit
+    private val onMusicLikeClicked: (MusicDisplayable) -> Unit,
 ) : BaseAdapter<Item, ItemMusicBinding>(GenericItemDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingViewHolder<Item, ItemMusicBinding> {
         val inflater = parent.layoutInflater
@@ -23,7 +23,7 @@ class ListMusicAdapter(
     }
 
     inner class NextHoursViewHolder(
-        binding: ItemMusicBinding
+        binding: ItemMusicBinding,
     ) :
         ViewBindingViewHolder<Item, ItemMusicBinding>(binding) {
 

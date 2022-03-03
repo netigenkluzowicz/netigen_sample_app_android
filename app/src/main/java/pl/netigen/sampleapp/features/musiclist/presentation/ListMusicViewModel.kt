@@ -2,7 +2,6 @@ package pl.netigen.sampleapp.features.musiclist.presentation
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import pl.netigen.sampleapp.core.base.BaseViewModel
@@ -22,10 +21,6 @@ class ListMusicViewModel @Inject constructor(
     private val setBuyMusicUseCase: SetBuyMusicUseCase,
 ) : BaseViewModel<MusicListDisplayable>(initialState = MusicListDisplayable()) {
 
-    private var jobLike: Job? = null
-    private var jobAllMusic: Job? = null
-    private var jobSyncMusic: Job? = null
-
     init {
         setState { state -> state.copy(isLoading = true) }
         getAllMusic()
@@ -34,9 +29,8 @@ class ListMusicViewModel @Inject constructor(
     }
 
     private fun synchronizeMusicFromRemote() {
-        if (jobSyncMusic?.isActive == true) return
-        jobSyncMusic = viewModelScope.launch {
-            getMusicFromRemoteUseCase.invoke().collect { resource ->
+        viewModelScope.launch {
+            getMusicFromRemoteUseCase.action(Unit).collect { resource ->
                 when (resource) {
                     is Resource.Error -> setState { state -> state.copy(error = resource.error ?: "") }
                     is Resource.Loading -> setState { state -> state.copy(isLoading = true) }
@@ -49,18 +43,16 @@ class ListMusicViewModel @Inject constructor(
     }
 
     private fun getLikeMusic() {
-        jobLike?.cancel()
-        jobLike = viewModelScope.launch {
-            getLikeMusicUseCase.invoke().distinctUntilChanged().collect {
+        viewModelScope.launch {
+            getLikeMusicUseCase.action(Unit).distinctUntilChanged().collect {
                 setState { state -> state.copy(isLoading = false, likeMusic = it.map { MusicDisplayable(it) }) }
             }
         }
     }
 
     private fun getAllMusic() {
-        jobAllMusic?.cancel()
-        jobAllMusic = viewModelScope.launch {
-            getAllMusicFromLocalUseCase.invoke().distinctUntilChanged().collect {
+        viewModelScope.launch {
+            getAllMusicFromLocalUseCase.action(Unit).distinctUntilChanged().collect {
                 setState { state -> state.copy(isLoading = false, allMusic = it.map { MusicDisplayable(it) }) }
             }
         }

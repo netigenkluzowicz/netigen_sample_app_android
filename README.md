@@ -21,6 +21,25 @@ Verify that your code follows the style guide
     Switch on File is not formatted according to project settings inspection. 
     Additional inspections that verify other issues described in the style guide 
     (such as naming conventions) are enabled by default.
+    
+We use [ktlint Idea plugin](https://plugins.jetbrains.com/plugin/15057-ktlint-unofficial-) with experimental enabled.
+It automatically runs ktlint on Kotlin files, and annotates any errors found.
+
+Enable and configure in Preferences > Tools > ktlint.
+
+Our editor config (.editconfig):
+
+    root = true
+    
+    [*.{java,kt,kts,xml,kt.spec,kts.spec}]
+    # noinspection EditorConfigKeyCorrectness
+    disabled_rules = no-wildcard-imports, import-ordering
+    charset = utf-8
+    insert_final_newline = true
+    ij_kotlin_allow_trailing_comma = true
+    ij_kotlin_allow_trailing_comma_on_call_site = true
+    max_line_length = 150
+    end_of_line = crlf
 
 ### Naming
 1. Drawables

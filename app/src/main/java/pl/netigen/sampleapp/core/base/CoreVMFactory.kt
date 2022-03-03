@@ -23,7 +23,7 @@ class CoreVMFactory(override val coreMainActivity: CoreMainActivity) : CoreViewM
                 "hms" -> Store.HUAWEI
                 "gms" -> Store.GOOGLE_PLAY
                 else -> Store.GOOGLE_PLAY
-            }
+            },
         )
     }
 
