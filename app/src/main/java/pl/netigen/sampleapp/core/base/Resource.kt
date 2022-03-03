@@ -2,10 +2,10 @@ package pl.netigen.sampleapp.core.base
 
 sealed class Resource<T>(
     val data: T? = null,
-    val error: String? = null
+    val error: String? = null,
 ) {
     class Success<T>(data: T) : Resource<T>(data)
-    class Loading<T>() : Resource<T>()
+    class Loading<T> : Resource<T>()
     class Error<T>(throwable: String) : Resource<T>(error = throwable)
 
     companion object {

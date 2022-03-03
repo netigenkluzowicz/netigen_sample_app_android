@@ -9,20 +9,21 @@ inline fun <ResultType, RequestType> networkBoundResource(
     crossinline saveFetchResult: suspend (RequestType) -> Unit,
     emitValue: Boolean = false,
     crossinline shouldFetch: (ResultType?) -> Boolean = { true },
-    coroutineDispatcher: CoroutineDispatcher
+    coroutineDispatcher: CoroutineDispatcher,
 ) = flow<Resource<ResultType>> {
     emit(Resource.loading())
     val data = query().firstOrNull()
-    if (data != null && emitValue) {
-        emit(Resource.success(data))
-    }
+
+    if (data != null && emitValue) emit(Resource.success(data))
+
     if (shouldFetch(data)) {
         val fetchResult = fetch()
         saveFetchResult(fetchResult)
     }
+
     val updatedData = query().first()
-    if (emitValue)
-        emit(Resource.success(updatedData))
+
+    if (emitValue) emit(Resource.success(updatedData))
 }.onStart {
     emit(Resource.loading())
 }.catch { exception ->
