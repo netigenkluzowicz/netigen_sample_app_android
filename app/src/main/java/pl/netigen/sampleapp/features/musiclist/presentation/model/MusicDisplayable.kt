@@ -15,6 +15,6 @@ data class MusicDisplayable(
         music.genre,
         music.name,
         music.isBuy,
-        music.isLike
+        music.isLike,
     )
 }

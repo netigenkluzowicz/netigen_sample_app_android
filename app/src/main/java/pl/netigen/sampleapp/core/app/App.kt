@@ -15,11 +15,13 @@ class App : Application() {
 
     private fun setupTimber() {
         if (BuildConfig.DEBUG) {
-            Timber.plant(object : Timber.DebugTree() {
-                override fun createStackElementTag(element: StackTraceElement): String {
-                    return "$TAG.${element.className.substringAfterLast(".")}.${element.methodName}"
-                }
-            })
+            Timber.plant(
+                object : Timber.DebugTree() {
+                    override fun createStackElementTag(element: StackTraceElement): String {
+                        return "$TAG.${element.className.substringAfterLast(".")}.${element.methodName}"
+                    }
+                },
+            )
         }
     }
 

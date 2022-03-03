@@ -31,13 +31,15 @@ abstract class AppDatabase : RoomDatabase() {
 
         private fun init(context: Context): AppDatabase {
             return Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "Database")
-                .addCallback(object : Callback() {
-                    override fun onCreate(db: SupportSQLiteDatabase) {
-                        super.onCreate(db)
-                        val database = getDatabase(context)
-                        GlobalScope.launch { database.initDatabase(context) }
-                    }
-                })
+                .addCallback(
+                    object : Callback() {
+                        override fun onCreate(db: SupportSQLiteDatabase) {
+                            super.onCreate(db)
+                            val database = getDatabase(context)
+                            GlobalScope.launch { database.initDatabase(context) }
+                        }
+                    },
+                )
                 .build()
         }
     }

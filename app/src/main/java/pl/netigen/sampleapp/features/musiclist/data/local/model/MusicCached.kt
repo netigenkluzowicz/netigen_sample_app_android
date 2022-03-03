@@ -30,7 +30,7 @@ data class MusicCached(
         music.paymentType,
         music.tempo,
         music.isBuy,
-        music.isLike
+        music.isLike,
     )
 
     companion object {
@@ -43,6 +43,6 @@ data class MusicCached(
     annotation class PaymentType
 
     fun toMusic() = Music(
-        baseBpm, genre, genreColor, loopId, measure, name, paymentType, tempo, isBuy, isLike
+        baseBpm, genre, genreColor, loopId, measure, name, paymentType, tempo, isBuy, isLike,
     )
 }
