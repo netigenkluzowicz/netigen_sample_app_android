@@ -39,12 +39,17 @@ class MusicListRepositoryImpl @Inject constructor(private val musicDao: MusicDao
         musicDao.updateMusic(audioById.copy(isLike = !audioById.isLike))
     }
 
-    override suspend fun setBuyMusic(isBuy: Boolean) { // todo:czy to na pewno dobrze
+    override suspend fun setBuyAllMusic(isBuy: Boolean) { // todo:czy to na pewno dobrze
         val listMusic = musicDao.getListMusic()
         listMusic.forEach { music ->
             if (music.paymentType == PREMIUM) {
                 musicDao.updateMusic(music.copy(isBuy = isBuy))
             }
         }
+    }
+
+    override suspend fun setBuyMusic(id: Int) { // todo:czy to na pewno dobrze
+        val music = musicDao.getMusicById(id)
+        musicDao.updateMusic(music.copy(isBuy = true))
     }
 }

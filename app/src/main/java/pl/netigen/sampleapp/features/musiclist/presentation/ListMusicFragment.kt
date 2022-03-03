@@ -1,6 +1,8 @@
 package pl.netigen.sampleapp.features.musiclist.presentation
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,18 +13,29 @@ import pl.netigen.sampleapp.core.base.BaseFragment
 import pl.netigen.sampleapp.core.extension.autoCleaned
 import pl.netigen.sampleapp.core.extension.gone
 import pl.netigen.sampleapp.core.extension.visible
+import pl.netigen.sampleapp.features.musiclist.framework.RewardedAds
 import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicDisplayable
 import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicListDisplayable
 import pl.netigen.sampleapp.flavour.FlavoursConst.NO_ADS_KEY
 import pl.netigen.sampleapp.flavour.FlavoursConst.SUBSCRIPTION_1
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDisplayable, ListMusicViewModel>() {
+
+    @Inject
+    lateinit var rewardedAd: RewardedAds
 
     override val viewModel: ListMusicViewModel by viewModels()
 
     private val audioListAdapter by autoCleaned(initializer = { ListMusicAdapter(::onMusicClicked, ::onLikeMusicClick) })
     private val likeListAdapter by autoCleaned(initializer = { ListMusicAdapter(::onMusicClicked, ::onLikeMusicClick) })
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.let { rewardedAd.initRewardedAds(it) }
+    }
+
     override fun initView() {
         binding.run {
             likeMusicRecyclerView.adapter = likeListAdapter
@@ -43,9 +56,16 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
     }
 
     private fun onMusicClicked(musicDisplayable: MusicDisplayable) {
+        if (musicDisplayable.isBuy.not()) {
+            activity?.let { rewardedAd.showRewardedAds(it) { rewardedMusic(musicDisplayable.id) } }
+        }
 //        findNavController().navigate(
 //            ListMusicFragment.actionNotesFragmentToNoteDetailFragment(audioDisplayable.id)
 //        )
+    }
+
+    private fun rewardedMusic(idMusic: Int) {
+        viewModel.buyMusic(id)
     }
 
     private fun onLikeMusicClick(musicDisplayable: MusicDisplayable) = viewModel.clickLikeMusic(musicDisplayable.id)
@@ -67,6 +87,11 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
             binding.run {
                 buyPremiumButton.gone()
                 buySubscribeButton.gone()
+            }
+        } else {
+            binding.run {
+                buyPremiumButton.visible()
+                buySubscribeButton.visible()
             }
         }
 

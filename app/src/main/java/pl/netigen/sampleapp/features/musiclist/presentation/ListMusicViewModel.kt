@@ -17,6 +17,7 @@ class ListMusicViewModel @Inject constructor(
     private val getLikeMusicUseCase: GetLikeMusicUseCase,
     private val clickLikeMusicUseCase: ClickLikeMusicUseCase,
     private val getMusicFromRemoteUseCase: GetMusicFromRemoteUseCase,
+    private val setBuyAllMusicUseCase: SetBuyAllMusicUseCase,
     private val setBuyMusicUseCase: SetBuyMusicUseCase,
 ) : BaseViewModel<MusicListDisplayable>(initialState = MusicListDisplayable()) {
 
@@ -66,7 +67,13 @@ class ListMusicViewModel @Inject constructor(
     fun setNoAdsActive(noAdsActive: Boolean) {
         viewModelScope.launch {
             setState { state -> state.copy(isUserPremium = noAdsActive) }
-            setBuyMusicUseCase.action(noAdsActive)
+            setBuyAllMusicUseCase.action(noAdsActive)
+        }
+    }
+
+    fun buyMusic(id: Int) {
+        viewModelScope.launch {
+            setBuyMusicUseCase.action(id)
         }
     }
 }

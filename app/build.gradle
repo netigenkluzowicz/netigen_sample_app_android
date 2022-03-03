@@ -9,14 +9,17 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "pl.netigen.notepad"
+        //ads
+        applicationId "pl.netigen.frequencygenerator"
+        //payment
+        //applicationId "pl.netigen.notepad"
         minSdk 23
         targetSdk 30
         versionCode generateVersionCode()
         versionName generateVersionName()
 
         // Sample AdMob app ID:
-        manifestPlaceholders = [admobId: "ca-app-pub-4699516034931013~6997920998"]
+        manifestPlaceholders = [admobId: "ca-app-pub-4699516034931013~3707111800"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

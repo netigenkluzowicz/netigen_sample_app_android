@@ -8,6 +8,8 @@ import pl.netigen.drumloops.rock.databinding.ItemMusicBinding
 import pl.netigen.sampleapp.core.base.BaseAdapter
 import pl.netigen.sampleapp.core.base.GenericItemDiffUtil
 import pl.netigen.sampleapp.core.data.Item
+import pl.netigen.sampleapp.core.extension.gone
+import pl.netigen.sampleapp.core.extension.visible
 import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicDisplayable
 
 class ListMusicAdapter(
@@ -49,6 +51,11 @@ class ListMusicAdapter(
                     Glide.with(itemView).load(R.drawable.ic_baseline_star_24).into(like)
                 } else {
                     Glide.with(itemView).load(R.drawable.ic_baseline_star_border_24).into(like)
+                }
+                if (item.isBuy) {
+                    block.gone()
+                } else {
+                    block.visible()
                 }
             }
         }
