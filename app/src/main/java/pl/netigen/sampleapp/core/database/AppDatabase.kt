@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import pl.netigen.sampleapp.features.musiclist.data.local.dao.MusicDao
 import pl.netigen.sampleapp.features.musiclist.data.local.model.MusicCached
 
-@Database(entities = [MusicCached::class], version = 1,)
+@Database(entities = [MusicCached::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

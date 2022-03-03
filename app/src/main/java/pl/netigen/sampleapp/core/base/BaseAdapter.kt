@@ -8,7 +8,7 @@ import androidx.viewbinding.ViewBinding
 import pl.netigen.sampleapp.core.data.Item
 
 abstract class BaseAdapter<T : Item, VB : ViewBinding>(
-    diffCallback: ViewBindingDiffUtilCallback<T>
+    diffCallback: ViewBindingDiffUtilCallback<T>,
 ) : ListAdapter<T, BaseAdapter.ViewBindingViewHolder<T, VB>>(diffCallback) {
     override fun onBindViewHolder(holder: ViewBindingViewHolder<T, VB>, position: Int) =
         holder.bind(item = getItem(position))
@@ -16,7 +16,7 @@ abstract class BaseAdapter<T : Item, VB : ViewBinding>(
     override fun onBindViewHolder(
         holder: ViewBindingViewHolder<T, VB>,
         position: Int,
-        payloads: MutableList<Any>
+        payloads: MutableList<Any>,
     ) = holder.bind(item = getItem(position), payloads = payloads)
 
     protected val ViewGroup.layoutInflater: LayoutInflater

@@ -11,7 +11,7 @@ import kotlin.reflect.KProperty
 class AutoCleanedValue<T : Any>(
     fragment: Fragment,
     private val initializer: (() -> T)?,
-    beforeCleaning: (T?) -> Unit
+    beforeCleaning: (T?) -> Unit,
 ) : ReadWriteProperty<Fragment, T> {
 
     private var _value: T? = null
@@ -63,7 +63,7 @@ class AutoCleanedValue<T : Any>(
  */
 fun <T : Any> Fragment.autoCleaned(
     initializer: (() -> T)? = null,
-    beforeCleaning: (T?) -> Unit = {}
+    beforeCleaning: (T?) -> Unit = {},
 ): AutoCleanedValue<T> {
     return AutoCleanedValue(this, initializer, beforeCleaning)
 }
