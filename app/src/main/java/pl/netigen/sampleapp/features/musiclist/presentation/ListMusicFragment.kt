@@ -68,7 +68,6 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
         viewModel.buyMusic(id)
     }
 
-
     private fun onLikeMusicClick(musicDisplayable: MusicDisplayable) = viewModel.clickLikeMusic(musicDisplayable.id)
 
     override fun render(state: MusicListDisplayable) {
@@ -113,5 +112,4 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
     }
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) = ListMusicFragmentBinding.inflate(inflater, container, false)
-
 }

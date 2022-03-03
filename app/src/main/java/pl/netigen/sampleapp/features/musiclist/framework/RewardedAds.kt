@@ -19,16 +19,19 @@ class RewardedAds @Inject constructor() {
         mRewardedAd?.fullScreenContentCallback = null
         var adRequest = AdRequest.Builder().build()
 
-        RewardedAd.load(context, TEST_REWARDED_ID, adRequest, object : RewardedAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                Timber.d("()")
-                mRewardedAd = null
-            }
+        RewardedAd.load(
+            context, TEST_REWARDED_ID, adRequest,
+            object : RewardedAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Timber.d("()")
+                    mRewardedAd = null
+                }
 
-            override fun onAdLoaded(rewardedAd: RewardedAd) {
-                mRewardedAd = rewardedAd
+                override fun onAdLoaded(rewardedAd: RewardedAd) {
+                    mRewardedAd = rewardedAd
+                }
             }
-        })
+        )
         initFullScreenContentCallback()
     }
 
@@ -58,7 +61,7 @@ class RewardedAds @Inject constructor() {
                 }
             }
         } else {
-            //todo: The rewarded ad wasn't ready yet.
+            // todo: The rewarded ad wasn't ready yet.
             initRewardedAds(context)
         }
     }
