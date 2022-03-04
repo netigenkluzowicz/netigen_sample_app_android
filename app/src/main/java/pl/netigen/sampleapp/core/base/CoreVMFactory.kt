@@ -1,15 +1,17 @@
 package pl.netigen.sampleapp.core.base
 
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import pl.netigen.core.config.AppConfig
 import pl.netigen.core.main.CoreMainActivity
 import pl.netigen.core.main.CoreViewModelsFactory
-import pl.netigen.coreapi.ads.IAds
-import pl.netigen.coreapi.gdpr.IGDPRConsent
 import pl.netigen.coreapi.main.Store
-import pl.netigen.coreapi.payments.IPayments
 import pl.netigen.drumloops.rock.BuildConfig
-
 import pl.netigen.sampleapp.flavour.FlavoursConst
+import javax.inject.Singleton
+
 
 class CoreVMFactory(override val coreMainActivity: CoreMainActivity) : CoreViewModelsFactory(coreMainActivity) {
 
@@ -27,12 +29,10 @@ class CoreVMFactory(override val coreMainActivity: CoreMainActivity) : CoreViewM
         )
     }
 
-    override val ads: IAds
-        get() = FlavoursConst.getAdsImpl(coreMainActivity, appConfig)
 
-    override val gdprConsent: IGDPRConsent
-        get() = FlavoursConst.getGDPRConsentImpl(coreMainActivity)
+    override val ads = FlavoursConst.getAdsImpl(coreMainActivity, appConfig)
 
-    override val payments: IPayments
-        get() = FlavoursConst.getPaymentsImpl(coreMainActivity, appConfig)
+    override val gdprConsent = FlavoursConst.getGDPRConsentImpl(coreMainActivity)
+
+    override val payments = FlavoursConst.getPaymentsImpl(coreMainActivity, appConfig)
 }

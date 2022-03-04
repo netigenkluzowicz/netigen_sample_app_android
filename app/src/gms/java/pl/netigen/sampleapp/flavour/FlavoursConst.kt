@@ -11,12 +11,12 @@ import pl.netigen.gms.gdpr.GDPRConsentImpl
 import pl.netigen.gms.payments.GMSPayments
 
 object FlavoursConst {
-    const val BANNER_AD_ID: String = TEST_BANNER_ID
-    const val INTERSTITIAL_AD_ID: String = TEST_INTERSTITIAL_ID
-    const val REWARDED_AD_ID: String = TEST_REWARDED_ID
+    const val BANNER_AD_ID: String = "ca-app-pub-4699516034931013/3784594593"
+    const val INTERSTITIAL_AD_ID: String = "ca-app-pub-4699516034931013/8214794191"
+    const val REWARDED_AD_ID: String = "ca-app-pub-4699516034931013/9099123417"
 
-    const val NO_ADS_KEY = ".noads"
-    const val SUBSCRIPTION_1 = ".subs_01"
+    const val NO_ADS_KEY = ".subs_plus_forever_info"
+    const val SUBSCRIPTION_1 = ".subs_1"
 
     fun getPaymentsImpl(coreMainActivity: CoreMainActivity, appConfig: AppConfig): IPayments {
         val inAppSkuList = mutableListOf(

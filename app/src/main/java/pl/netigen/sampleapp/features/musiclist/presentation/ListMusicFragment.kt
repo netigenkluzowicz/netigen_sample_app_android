@@ -18,6 +18,7 @@ import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicDisplayab
 import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicListDisplayable
 import pl.netigen.sampleapp.flavour.FlavoursConst.NO_ADS_KEY
 import pl.netigen.sampleapp.flavour.FlavoursConst.SUBSCRIPTION_1
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,7 +34,7 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.let { rewardedAd.initRewardedAds(it) }
+        activity?.let { rewardedAd.initRewardedAds() }
     }
 
     override fun initView() {
@@ -57,7 +58,7 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
 
     private fun onMusicClicked(musicDisplayable: MusicDisplayable) {
         if (musicDisplayable.isBuy.not()) {
-            activity?.let { rewardedAd.showRewardedAds(it) { rewardedMusic(musicDisplayable.id) } }
+            activity?.let { rewardedAd.showRewardedAds() { rewardedMusic(musicDisplayable.id) } }
         }
 //        findNavController().navigate(
 //            ListMusicFragment.actionNotesFragmentToNoteDetailFragment(audioDisplayable.id)
@@ -65,7 +66,8 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
     }
 
     private fun rewardedMusic(idMusic: Int) {
-        viewModel.buyMusic(id)
+        Timber.d("()")
+        viewModel.buyMusic(idMusic)
     }
 
     private fun onLikeMusicClick(musicDisplayable: MusicDisplayable) = viewModel.clickLikeMusic(musicDisplayable.id)
