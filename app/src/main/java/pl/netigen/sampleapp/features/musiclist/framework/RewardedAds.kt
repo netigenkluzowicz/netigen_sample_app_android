@@ -26,11 +26,12 @@ class RewardedAds @Inject constructor(@ActivityContext private val activity: Con
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(error: LoadAdError) {
                     Timber.d(error.toString())
-                    mRewardedAd = null
+                    reload()
                 }
 
                 override fun onAdLoaded(rewardedAd: RewardedAd) {
                     mRewardedAd = rewardedAd
+                    initFullScreenContentCallback()
                 }
             },
         )
@@ -45,12 +46,12 @@ class RewardedAds @Inject constructor(@ActivityContext private val activity: Con
 
             override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
                 Timber.d("()")
+                reload()
             }
 
             override fun onAdDismissedFullScreenContent() {
                 Timber.d("()")
-                mRewardedAd = null
-                initRewardedAds()
+                reload()
             }
         }
     }
@@ -61,10 +62,16 @@ class RewardedAds @Inject constructor(@ActivityContext private val activity: Con
                 activity as Activity,
             ) {
                 addReward()
+                reload()
             }
         } else {
-            // todo: The rewarded ad wasn't ready yet.
-            initRewardedAds()
+            reload()
         }
+
+    }
+
+    private fun reload() {
+        mRewardedAd = null
+        initRewardedAds()
     }
 }
