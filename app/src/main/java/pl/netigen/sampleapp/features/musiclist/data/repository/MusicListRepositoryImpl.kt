@@ -17,9 +17,11 @@ class MusicListRepositoryImpl @Inject constructor(private val musicDao: MusicDao
 
     override fun getLikeMusic(): Flow<List<Music>> = musicDao.getLikeMusic().map { audio -> audio.map { it.toMusic() } }
 
-    override fun getMusicFromLocal() = musicDao.getMusic().map { audio -> audio.map { it.toMusic() } }
+    override fun getMusic() = getMusicFromLocal().also { getMusicFromRemote() }
 
-    override suspend fun getMusicFromRemote() = networkBoundResource(
+    private fun getMusicFromLocal() = musicDao.getMusic().map { audio -> audio.map { it.toMusic() } }
+
+    override fun getMusicFromRemote() = networkBoundResource(
         query = { getMusicFromLocal() },
         fetch = { musicApi.getMusics() },
         saveFetchResult = { list -> saveMusicToLocal(list) },

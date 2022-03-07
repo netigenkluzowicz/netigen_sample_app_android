@@ -7,8 +7,8 @@ import pl.netigen.sampleapp.features.musiclist.domain.model.Music
 
 interface MusicListRepository {
     fun getLikeMusic(): Flow<List<Music>>
-    fun getMusicFromLocal(): Flow<List<Music>>
-    suspend fun getMusicFromRemote(): Flow<Resource<List<Music>>>
+    fun getMusic(): Flow<List<Music>>
+    fun getMusicFromRemote(): Flow<Resource<List<Music>>>
     suspend fun saveMusicToLocal(list: MusicResponse)
     suspend fun setLikeMusic(id: Int)
     suspend fun setBuyAllMusic(params: Boolean)

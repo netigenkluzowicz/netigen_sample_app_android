@@ -7,6 +7,5 @@ import pl.netigen.sampleapp.features.musiclist.domain.model.Music
 import javax.inject.Inject
 
 class GetAllMusicFromLocalUseCase @Inject constructor(private val musicListRepository: MusicListRepository) : UseCase<Flow<List<Music>>, Unit>() {
-
-    override suspend fun action(params: Unit) = musicListRepository.getMusicFromLocal()
+    override suspend fun action(params: Unit) = musicListRepository.getMusic()
 }

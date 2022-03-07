@@ -13,10 +13,11 @@ import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import pl.netigen.core.fragment.NetigenVMFragment
+import pl.netigen.sampleapp.core.data.ViewEvent
 import pl.netigen.sampleapp.core.data.ViewState
 import pl.netigen.sampleapp.core.extension.autoCleaned
 
-abstract class BaseFragment<VB : ViewBinding, STATE : ViewState, VM : BaseViewModel<STATE>> : NetigenVMFragment() {
+abstract class BaseFragment<VB : ViewBinding, STATE : ViewState, EVENT : ViewEvent, VM : BaseViewModel<STATE, EVENT>> : NetigenVMFragment() {
 
     private var _binding: VB by autoCleaned()
     val binding: VB get() = _binding
@@ -34,6 +35,8 @@ abstract class BaseFragment<VB : ViewBinding, STATE : ViewState, VM : BaseViewMo
 
     abstract fun initView()
     abstract fun render(state: STATE)
+    abstract fun onEventSent(event: EVENT)
+
     abstract fun noAdsActive(noAdsActive: Boolean)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
