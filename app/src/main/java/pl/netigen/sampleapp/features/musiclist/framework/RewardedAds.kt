@@ -39,7 +39,6 @@ class RewardedAds @Inject constructor(@ActivityContext private val activity: Con
                 }
             },
         )
-
     }
 
     private fun initFullScreenContentCallback() {
@@ -71,7 +70,6 @@ class RewardedAds @Inject constructor(@ActivityContext private val activity: Con
         } else {
             reload()
         }
-
     }
 
     private fun reload() {
