@@ -17,7 +17,11 @@ import javax.inject.Inject
 class RewardedAds @Inject constructor(@ActivityContext private val activity: Context) {
     private var mRewardedAd: RewardedAd? = null
 
-    fun initRewardedAds() {
+    init {
+        initRewardedAds()
+    }
+
+    private fun initRewardedAds() {
         mRewardedAd?.fullScreenContentCallback = null
         var adRequest = AdRequest.Builder().build()
 

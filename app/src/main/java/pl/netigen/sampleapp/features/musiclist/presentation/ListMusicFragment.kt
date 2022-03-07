@@ -34,7 +34,6 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.let { rewardedAd.initRewardedAds() }
     }
 
     override fun initView() {
