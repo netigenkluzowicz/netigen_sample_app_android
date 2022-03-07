@@ -1,6 +1,6 @@
 package pl.netigen.sampleapp.features.musiclist.presentation.model
 
-import pl.netigen.sampleapp.core.data.State
+import pl.netigen.sampleapp.core.data.ViewState
 
 data class MusicListDisplayable(
     val isLoading: Boolean = false,
@@ -8,4 +8,4 @@ data class MusicListDisplayable(
     val likeMusic: List<MusicDisplayable> = emptyList(),
     val error: String = "",
     val isUserPremium: Boolean = false,
-) : State
+) : ViewState

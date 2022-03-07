@@ -15,7 +15,6 @@ class ApiModule {
     @Singleton
     @Provides
     fun provideRickAndMortyService(): MusicApi {
-
         return Retrofit.Builder()
             .baseUrl("https://strapi-drumloops.netigen.eu/v2/")
             .addConverterFactory(GsonConverterFactory.create())

@@ -1,38 +1,44 @@
 package pl.netigen.sampleapp.features.musiclist.framework
 
 import android.app.Activity
+import android.content.Context
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
-import pl.netigen.gms.ads.AdMobAds.Companion.TEST_REWARDED_ID
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.scopes.ActivityScoped
 import timber.log.Timber
 import javax.inject.Inject
 
-class RewardedAds @Inject constructor() {
+@ActivityScoped
+class RewardedAds @Inject constructor(@ActivityContext private val activity: Context) {
     private var mRewardedAd: RewardedAd? = null
 
-    fun initRewardedAds(context: Activity) {
+    init {
+        initRewardedAds()
+    }
+
+    private fun initRewardedAds() {
         mRewardedAd?.fullScreenContentCallback = null
         var adRequest = AdRequest.Builder().build()
 
         RewardedAd.load(
-            context, TEST_REWARDED_ID, adRequest,
+            activity, "ca-app-pub-4699516034931013/6159464536", adRequest,
             object : RewardedAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Timber.d("()")
-                    mRewardedAd = null
+                override fun onAdFailedToLoad(error: LoadAdError) {
+                    Timber.d(error.toString())
+                    reload()
                 }
 
                 override fun onAdLoaded(rewardedAd: RewardedAd) {
                     mRewardedAd = rewardedAd
+                    initFullScreenContentCallback()
                 }
-            }
+            },
         )
-        initFullScreenContentCallback()
     }
 
     private fun initFullScreenContentCallback() {
@@ -43,26 +49,31 @@ class RewardedAds @Inject constructor() {
 
             override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
                 Timber.d("()")
+                reload()
             }
 
             override fun onAdDismissedFullScreenContent() {
                 Timber.d("()")
-                mRewardedAd = null
+                reload()
             }
         }
     }
 
-    fun showRewardedAds(context: Activity, addReward: () -> Unit) {
+    fun showRewardedAds(addReward: () -> Unit) {
         if (mRewardedAd != null) {
-            mRewardedAd?.show(context) {
-                fun onUserEarnedReward(rewardItem: RewardItem) {
-                    addReward()
-                    initRewardedAds(context)
-                }
+            mRewardedAd?.show(
+                activity as Activity,
+            ) {
+                addReward()
+                reload()
             }
         } else {
-            // todo: The rewarded ad wasn't ready yet.
-            initRewardedAds(context)
+            reload()
         }
+    }
+
+    private fun reload() {
+        mRewardedAd = null
+        initRewardedAds()
     }
 }

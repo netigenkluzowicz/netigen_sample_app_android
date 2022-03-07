@@ -4,7 +4,11 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import pl.netigen.core.main.CoreViewModelsFactory
+import pl.netigen.coreapi.payments.IPayments
+import pl.netigen.coreapi.payments.Payments
 import pl.netigen.sampleapp.core.base.BaseViewModel
+import pl.netigen.sampleapp.core.base.CoreVMFactory
 import pl.netigen.sampleapp.core.base.Resource
 import pl.netigen.sampleapp.features.musiclist.domain.usecase.*
 import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicDisplayable
@@ -66,7 +70,6 @@ class ListMusicViewModel @Inject constructor(
 
     fun setNoAdsActive(noAdsActive: Boolean) {
         viewModelScope.launch {
-            setState { state -> state.copy(isUserPremium = noAdsActive) }
             setBuyAllMusicUseCase.action(noAdsActive)
         }
     }

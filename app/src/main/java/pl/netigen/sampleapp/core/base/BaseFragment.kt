@@ -13,10 +13,10 @@ import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import pl.netigen.core.fragment.NetigenVMFragment
-import pl.netigen.sampleapp.core.data.State
+import pl.netigen.sampleapp.core.data.ViewState
 import pl.netigen.sampleapp.core.extension.autoCleaned
 
-abstract class BaseFragment<VB : ViewBinding, STATE : State, VM : BaseViewModel<STATE>> : NetigenVMFragment() {
+abstract class BaseFragment<VB : ViewBinding, STATE : ViewState, VM : BaseViewModel<STATE>> : NetigenVMFragment() {
 
     private var _binding: VB by autoCleaned()
     val binding: VB get() = _binding
