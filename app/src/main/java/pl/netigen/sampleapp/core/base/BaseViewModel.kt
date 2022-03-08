@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import pl.netigen.sampleapp.core.data.ViewEvent
 import pl.netigen.sampleapp.core.data.ViewState
-import java.lang.Exception
 
 abstract class BaseViewModel<STATE : ViewState, Event : ViewEvent>() : ViewModel() {
 

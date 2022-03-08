@@ -3,7 +3,6 @@ package pl.netigen.sampleapp.features.musiclist.presentation.model
 import pl.netigen.sampleapp.core.data.ViewEvent
 import pl.netigen.sampleapp.core.data.ViewState
 
-
 class MusicListContract {
     data class MusicListState(
         val isLoading: Boolean = false,
@@ -18,5 +17,4 @@ class MusicListContract {
         data class SetNoAdsActive(val noAdsActive: Boolean) : MusicListEvent()
         data class BuyMusicForRewardedAd(val music: MusicDisplayable) : MusicListEvent()
     }
-
 }
