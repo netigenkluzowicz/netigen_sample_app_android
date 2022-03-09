@@ -4,15 +4,10 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import pl.netigen.core.main.CoreViewModelsFactory
-import pl.netigen.coreapi.payments.IPayments
-import pl.netigen.coreapi.payments.Payments
 import pl.netigen.sampleapp.core.base.BaseViewModel
-import pl.netigen.sampleapp.core.base.CoreVMFactory
-import pl.netigen.sampleapp.core.base.Resource
 import pl.netigen.sampleapp.features.musiclist.domain.usecase.*
 import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicDisplayable
-import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicListDisplayable
+import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicListContract
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,30 +15,15 @@ class ListMusicViewModel @Inject constructor(
     private val getAllMusicFromLocalUseCase: GetAllMusicFromLocalUseCase,
     private val getLikeMusicUseCase: GetLikeMusicUseCase,
     private val clickLikeMusicUseCase: ClickLikeMusicUseCase,
-    private val getMusicFromRemoteUseCase: GetMusicFromRemoteUseCase,
     private val setBuyAllMusicUseCase: SetBuyAllMusicUseCase,
     private val setBuyMusicUseCase: SetBuyMusicUseCase,
-) : BaseViewModel<MusicListDisplayable>(initialState = MusicListDisplayable()) {
+) : BaseViewModel<MusicListContract.MusicListState, MusicListContract.MusicListEvent>() {
 
     init {
         setState { state -> state.copy(isLoading = true) }
         getAllMusic()
         getLikeMusic()
-        synchronizeMusicFromRemote()
-    }
-
-    private fun synchronizeMusicFromRemote() {
-        viewModelScope.launch {
-            getMusicFromRemoteUseCase.action(Unit).collect { resource ->
-                when (resource) {
-                    is Resource.Error -> setState { state -> state.copy(error = resource.error ?: "") }
-                    is Resource.Loading -> setState { state -> state.copy(isLoading = true) }
-                    is Resource.Success -> setState { state ->
-                        state.copy(allMusic = (resource.data?.map { MusicDisplayable(it) } ?: listOf()))
-                    }
-                }
-            }
-        }
+        subscribeToEvents()
     }
 
     private fun getLikeMusic() {
@@ -62,21 +42,25 @@ class ListMusicViewModel @Inject constructor(
         }
     }
 
-    fun clickLikeMusic(id: Int) {
-        viewModelScope.launch {
-            clickLikeMusicUseCase.action(id)
+    override fun handleEvents(event: MusicListContract.MusicListEvent) {
+        when (event) {
+            is MusicListContract.MusicListEvent.LikeMusicClicked -> {
+                viewModelScope.launch {
+                    clickLikeMusicUseCase.action(event.music.id)
+                }
+            }
+            is MusicListContract.MusicListEvent.SetNoAdsActive -> {
+                viewModelScope.launch {
+                    setBuyAllMusicUseCase.action(event.noAdsActive)
+                }
+            }
+            is MusicListContract.MusicListEvent.BuyMusicForRewardedAd -> {
+                viewModelScope.launch {
+                    setBuyMusicUseCase.action(event.music.id)
+                }
+            }
         }
     }
 
-    fun setNoAdsActive(noAdsActive: Boolean) {
-        viewModelScope.launch {
-            setBuyAllMusicUseCase.action(noAdsActive)
-        }
-    }
-
-    fun buyMusic(id: Int) {
-        viewModelScope.launch {
-            setBuyMusicUseCase.action(id)
-        }
-    }
+    override fun setInitialState(): MusicListContract.MusicListState = MusicListContract.MusicListState()
 }

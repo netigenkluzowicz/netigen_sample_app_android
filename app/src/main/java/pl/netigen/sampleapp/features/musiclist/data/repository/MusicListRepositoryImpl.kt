@@ -3,9 +3,9 @@ package pl.netigen.sampleapp.features.musiclist.data.repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import pl.netigen.sampleapp.core.api.MusicApi
 import pl.netigen.sampleapp.core.api.MusicResponse
-import pl.netigen.sampleapp.core.base.networkBoundResource
 import pl.netigen.sampleapp.features.musiclist.data.local.dao.MusicDao
 import pl.netigen.sampleapp.features.musiclist.data.local.model.MusicCached
 import pl.netigen.sampleapp.features.musiclist.data.local.model.MusicCached.Companion.PREMIUM
@@ -17,18 +17,16 @@ class MusicListRepositoryImpl @Inject constructor(private val musicDao: MusicDao
 
     override fun getLikeMusic(): Flow<List<Music>> = musicDao.getLikeMusic().map { audio -> audio.map { it.toMusic() } }
 
-    override fun getMusicFromLocal() = musicDao.getMusic().map { audio -> audio.map { it.toMusic() } }
+    override suspend fun getMusic(): Flow<List<Music>> {
+        withContext(Dispatchers.IO) {
+            saveMusicToLocal(musicApi.getMusics())
+        }
+        return getMusicFromLocal()
+    }
 
-    override suspend fun getMusicFromRemote() = networkBoundResource(
-        query = { getMusicFromLocal() },
-        fetch = { musicApi.getMusics() },
-        saveFetchResult = { list -> saveMusicToLocal(list) },
-        emitValue = false,
-        shouldFetch = { true },
-        coroutineDispatcher = Dispatchers.IO,
-    )
+    private fun getMusicFromLocal() = musicDao.getMusic().map { audio -> audio.map { it.toMusic() } }
 
-    override suspend fun saveMusicToLocal(list: MusicResponse) {
+    private suspend fun saveMusicToLocal(list: MusicResponse) {
         list.map { it.toAudio() }.map { MusicCached(it) }.toTypedArray().let {
             musicDao.saveMusic(*it)
         }

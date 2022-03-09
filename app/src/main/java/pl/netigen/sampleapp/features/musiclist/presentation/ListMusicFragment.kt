@@ -1,8 +1,6 @@
 package pl.netigen.sampleapp.features.musiclist.presentation
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,14 +13,14 @@ import pl.netigen.sampleapp.core.extension.gone
 import pl.netigen.sampleapp.core.extension.visible
 import pl.netigen.sampleapp.features.musiclist.framework.RewardedAds
 import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicDisplayable
-import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicListDisplayable
+import pl.netigen.sampleapp.features.musiclist.presentation.model.MusicListContract
 import pl.netigen.sampleapp.flavour.FlavoursConst.NO_ADS_KEY
 import pl.netigen.sampleapp.flavour.FlavoursConst.SUBSCRIPTION_1
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDisplayable, ListMusicViewModel>() {
+class ListMusicFragment :
+    BaseFragment<ListMusicFragmentBinding, MusicListContract.MusicListState, MusicListContract.MusicListEvent, ListMusicViewModel>() {
 
     @Inject
     lateinit var rewardedAd: RewardedAds
@@ -31,10 +29,6 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
 
     private val audioListAdapter by autoCleaned(initializer = { ListMusicAdapter(::onMusicClicked, ::onLikeMusicClick) })
     private val likeListAdapter by autoCleaned(initializer = { ListMusicAdapter(::onMusicClicked, ::onLikeMusicClick) })
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun initView() {
         binding.run {
@@ -57,21 +51,16 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
 
     private fun onMusicClicked(musicDisplayable: MusicDisplayable) {
         if (musicDisplayable.isBuy.not()) {
-            activity?.let { rewardedAd.showRewardedAds() { rewardedMusic(musicDisplayable.id) } }
+            activity?.let { rewardedAd.showRewardedAds { rewardedMusic(musicDisplayable) } }
         }
-//        findNavController().navigate(
-//            ListMusicFragment.actionNotesFragmentToNoteDetailFragment(audioDisplayable.id)
-//        )
     }
 
-    private fun rewardedMusic(idMusic: Int) {
-        Timber.d("()")
-        viewModel.buyMusic(idMusic)
-    }
+    private fun rewardedMusic(music: MusicDisplayable) = onEventSent(MusicListContract.MusicListEvent.BuyMusicForRewardedAd(music))
 
-    private fun onLikeMusicClick(musicDisplayable: MusicDisplayable) = viewModel.clickLikeMusic(musicDisplayable.id)
+    private fun onLikeMusicClick(musicDisplayable: MusicDisplayable) =
+        onEventSent(MusicListContract.MusicListEvent.LikeMusicClicked(musicDisplayable))
 
-    override fun render(state: MusicListDisplayable) {
+    override fun render(state: MusicListContract.MusicListState) {
         val error = state.error
         if (error != "") {
             showToast(error)
@@ -100,17 +89,13 @@ class ListMusicFragment : BaseFragment<ListMusicFragmentBinding, MusicListDispla
         likeMusicLoaded(likeMusic)
     }
 
-    override fun noAdsActive(noAdsActive: Boolean) {
-        viewModel.setNoAdsActive(noAdsActive)
-    }
+    override fun noAdsActive(noAdsActive: Boolean) = onEventSent(MusicListContract.MusicListEvent.SetNoAdsActive(noAdsActive))
 
-    private fun likeMusicLoaded(musicList: List<MusicDisplayable>) {
-        likeListAdapter.submitList(musicList)
-    }
+    private fun likeMusicLoaded(musicList: List<MusicDisplayable>) = likeListAdapter.submitList(musicList)
 
-    private fun allMusicLoaded(musicList: List<MusicDisplayable>) {
-        audioListAdapter.submitList(musicList)
-    }
+    private fun allMusicLoaded(musicList: List<MusicDisplayable>) = audioListAdapter.submitList(musicList)
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) = ListMusicFragmentBinding.inflate(inflater, container, false)
+
+    override fun onEventSent(event: MusicListContract.MusicListEvent) = viewModel.setEvent(event)
 }
