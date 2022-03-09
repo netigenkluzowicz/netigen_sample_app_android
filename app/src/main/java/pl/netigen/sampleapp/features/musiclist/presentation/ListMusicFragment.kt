@@ -51,13 +51,11 @@ class ListMusicFragment :
 
     private fun onMusicClicked(musicDisplayable: MusicDisplayable) {
         if (musicDisplayable.isBuy.not()) {
-            activity?.let { rewardedAd.showRewardedAds() { rewardedMusic(musicDisplayable) } }
+            activity?.let { rewardedAd.showRewardedAds { rewardedMusic(musicDisplayable) } }
         }
     }
 
-    private fun rewardedMusic(music: MusicDisplayable) {
-        onEventSent(MusicListContract.MusicListEvent.BuyMusicForRewardedAd(music))
-    }
+    private fun rewardedMusic(music: MusicDisplayable) = onEventSent(MusicListContract.MusicListEvent.BuyMusicForRewardedAd(music))
 
     private fun onLikeMusicClick(musicDisplayable: MusicDisplayable) =
         onEventSent(MusicListContract.MusicListEvent.LikeMusicClicked(musicDisplayable))
@@ -91,21 +89,13 @@ class ListMusicFragment :
         likeMusicLoaded(likeMusic)
     }
 
-    override fun noAdsActive(noAdsActive: Boolean) {
-        onEventSent(MusicListContract.MusicListEvent.SetNoAdsActive(noAdsActive))
-    }
+    override fun noAdsActive(noAdsActive: Boolean) = onEventSent(MusicListContract.MusicListEvent.SetNoAdsActive(noAdsActive))
 
-    private fun likeMusicLoaded(musicList: List<MusicDisplayable>) {
-        likeListAdapter.submitList(musicList)
-    }
+    private fun likeMusicLoaded(musicList: List<MusicDisplayable>) = likeListAdapter.submitList(musicList)
 
-    private fun allMusicLoaded(musicList: List<MusicDisplayable>) {
-        audioListAdapter.submitList(musicList)
-    }
+    private fun allMusicLoaded(musicList: List<MusicDisplayable>) = audioListAdapter.submitList(musicList)
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) = ListMusicFragmentBinding.inflate(inflater, container, false)
 
-    override fun onEventSent(event: MusicListContract.MusicListEvent) {
-        viewModel.setEvent(event)
-    }
+    override fun onEventSent(event: MusicListContract.MusicListEvent) = viewModel.setEvent(event)
 }

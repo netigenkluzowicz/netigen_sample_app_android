@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import pl.netigen.sampleapp.core.data.ViewEvent
 import pl.netigen.sampleapp.core.data.ViewState
 
-abstract class BaseViewModel<STATE : ViewState, Event : ViewEvent>() : ViewModel() {
+abstract class BaseViewModel<STATE : ViewState, Event : ViewEvent> : ViewModel() {
 
     private val initialState: STATE by lazy { setInitialState() }
     abstract fun setInitialState(): STATE
@@ -29,10 +29,8 @@ abstract class BaseViewModel<STATE : ViewState, Event : ViewEvent>() : ViewModel
                 _event.collect {
                     handleEvents(it)
                 }
-            } catch (e:Exception){
-
+            } catch (e: Exception) {
             }
         }
     }
-
 }
