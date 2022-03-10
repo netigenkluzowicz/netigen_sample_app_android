@@ -1,6 +1,9 @@
 package pl.netigen.sampleapp.core.base
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
 import retrofit2.Response
 
 inline fun <DB, REMOTE> networkLocalBoundResource(
@@ -21,16 +24,22 @@ inline fun <DB, REMOTE> networkLocalBoundResource(
             }
             emitAll(fetchFromLocal().map { dbData -> Resource.success(dbData) })
         } else {
-            val msg = fetchResult.errorBody()?.string()
+
+            val msg = fetchResult.errorBody()?.stringSuspending()
             val errorMsg = if (msg.isNullOrEmpty()) {
                 fetchResult.message()
             } else {
                 msg
             }
             emit(Resource.error(errorMsg))
+
         }
 
     } else {
         emitAll(fetchFromLocal().map { dbData -> Resource.success(dbData) })
     }
 }
+
+@Suppress("BlockingMethodInNonBlockingContext")
+suspend fun ResponseBody.stringSuspending() =
+    withContext(Dispatchers.IO) { string() }

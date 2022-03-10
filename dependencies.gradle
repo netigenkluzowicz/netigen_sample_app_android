@@ -92,6 +92,9 @@ ext {
     def timberVersion = "5.0.1"
     timber = "com.jakewharton.timber:timber:" + timberVersion
 
+    def leakcanaryVersion = "2.8.1"
+    leakcanary = "com.squareup.leakcanary:leakcanary-android:" + leakcanaryVersion
+
     //api_android
     def hmsPluginVersion = "1.4.1.300"
     def apiAndroidVersion = "3.4.6-alpha"
@@ -100,4 +103,7 @@ ext {
     coreApiAndroid = "com.github.netigenkluzowicz.api_android:core:" + apiAndroidVersion
     gmsApiAndroid = "com.github.netigenkluzowicz.api_android:gms:" + apiAndroidVersion
     hmsApiAndroid = "com.github.netigenkluzowicz.api_android:hms: " + apiAndroidVersion
+
+
+
 }
