@@ -8,6 +8,6 @@ interface MusicListRepository {
     fun getLikeMusic(): Flow<List<Music>>
     suspend fun getMusic(): Flow<Resource<List<Music>>>
     suspend fun setLikeMusic(id: Int)
-    suspend fun setBuyAllMusic(params: Boolean)
+    suspend fun setBuyAllMusic(isBuy: Boolean)
     suspend fun setBuyMusic(params: Int)
 }
