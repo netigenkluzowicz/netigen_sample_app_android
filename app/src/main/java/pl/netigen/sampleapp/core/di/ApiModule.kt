@@ -18,7 +18,6 @@ class ApiModule {
         return Retrofit.Builder()
             .baseUrl("https://strapi-drumloops.netigen.eu/v2/")
             .addConverterFactory(GsonConverterFactory.create())
-
             .build()
             .create(MusicApi::class.java)
     }

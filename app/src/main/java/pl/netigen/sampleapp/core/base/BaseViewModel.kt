@@ -33,5 +33,4 @@ abstract class BaseViewModel<STATE : ViewState, Event : ViewEvent> : ViewModel()
             }
         }
     }
-
 }

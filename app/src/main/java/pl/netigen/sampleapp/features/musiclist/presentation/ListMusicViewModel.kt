@@ -39,9 +39,7 @@ class ListMusicViewModel @Inject constructor(
             result.onFailure {
                 setState { state -> state.copy(error = it.message ?: "") }
             }
-
         }
-
     }
 
     private fun getAllMusic() {
@@ -69,9 +67,7 @@ class ListMusicViewModel @Inject constructor(
                 setState { state -> state.copy(error = it.message ?: "") }
             }
         }
-
     }
-
 
     override fun handleEvents(event: MusicListContract.MusicListEvent) {
         when (event) {

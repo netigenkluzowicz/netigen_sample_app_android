@@ -32,9 +32,7 @@ inline fun <DB, REMOTE> networkLocalBoundResource(
                 msg
             }
             emit(Resource.error(errorMsg))
-
         }
-
     } else {
         emitAll(fetchFromLocal().map { dbData -> Resource.success(dbData) })
     }
