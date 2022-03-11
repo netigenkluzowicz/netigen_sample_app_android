@@ -87,6 +87,9 @@ dependencies {
     //timber
     implementation timber
 
+    //leakcanary
+    debugImplementation leakcanary
+
     //test dependencies
     testImplementation testImplementationDependencies.values()
     testRuntimeOnly testRuntimeDependence
