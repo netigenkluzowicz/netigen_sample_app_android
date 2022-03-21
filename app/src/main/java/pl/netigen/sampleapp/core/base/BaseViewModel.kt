@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import pl.netigen.sampleapp.core.data.ViewEvent
 import pl.netigen.sampleapp.core.data.ViewState
+import timber.log.Timber
 
 abstract class BaseViewModel<STATE : ViewState, Event : ViewEvent> : ViewModel() {
 
@@ -24,13 +25,8 @@ abstract class BaseViewModel<STATE : ViewState, Event : ViewEvent> : ViewModel()
     abstract fun handleEvents(event: Event)
 
     fun subscribeToEvents() {
-        viewModelScope.launch {
-            try {
-                _event.collect {
-                    handleEvents(it)
-                }
-            } catch (e: Exception) {
-            }
-        }
+        viewModelScope.launch { kotlin.runCatching { _event.collect(this@BaseViewModel::handleEvents) }.onFailure(this@BaseViewModel::handleErrors) }
     }
+
+    open fun handleErrors(throwable: Throwable) = Timber.e(throwable)
 }
