@@ -99,6 +99,11 @@ ext {
     def hmsPluginVersion = "1.4.1.300"
     def apiAndroidVersion = "3.4.6-alpha"
 
+
+    //peko lib for async permissions
+    def pekoVersion = "2.1.3"
+    peko = "com.markodevcic:peko:" + pekoVersion
+
     hmsPlugin = "com.huawei.agconnect:agcp:" + hmsPluginVersion
     coreApiAndroid = "com.github.netigenkluzowicz.api_android:core:" + apiAndroidVersion
     gmsApiAndroid = "com.github.netigenkluzowicz.api_android:gms:" + apiAndroidVersion

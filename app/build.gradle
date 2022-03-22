@@ -90,6 +90,9 @@ dependencies {
     //leakcanary
     debugImplementation leakcanary
 
+    //peko
+    implementation peko
+
     //test dependencies
     testImplementation testImplementationDependencies.values()
     testRuntimeOnly testRuntimeDependence
