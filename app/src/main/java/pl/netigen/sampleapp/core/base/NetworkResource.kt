@@ -9,9 +9,8 @@ inline fun <REMOTE> networkResource(
     emit(Resource.loading())
     val fetchResult = fetchFromRemote()
     if (fetchResult.isSuccessful) {
-        fetchResult.body()?.let {
-            emit(Resource.success(it))
-        }
+        val body = fetchResult.body()
+        if (body != null) emit(Resource.success(body)) else emit(Resource.error("Body is null"))
     } else {
         val msg = fetchResult.errorBody()?.string()
         val errorMsg = if (msg.isNullOrEmpty()) {
