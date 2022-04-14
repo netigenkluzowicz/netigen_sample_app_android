@@ -14,13 +14,9 @@ import javax.inject.Singleton
 internal class DatabaseProvider {
     @Singleton
     @Provides
-    fun provideDatabase(app: Application): AppDatabase {
-        return AppDatabase.getDatabase(app)
-    }
+    fun provideDatabase(app: Application): AppDatabase = AppDatabase.getDatabase(app)
 
     @Singleton
     @Provides
-    fun audioDao(db: AppDatabase): MusicDao {
-        return db.audioDao()
-    }
+    fun audioDao(db: AppDatabase): MusicDao = db.audioDao()
 }
