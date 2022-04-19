@@ -24,7 +24,6 @@ class ListMusicViewModel @Inject constructor(
     init {
         getAllMusic()
         getLikeMusic()
-        subscribeToEvents()
     }
 
     private fun getLikeMusic() {

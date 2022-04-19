@@ -37,10 +37,7 @@ abstract class BaseFragment<VB : ViewBinding, STATE : ViewState, EVENT : ViewEve
     abstract fun initView()
     abstract fun render(state: STATE)
 
-    open fun onEventSent(event: EVENT) {
-        Timber.d("event = [$event]")
-        viewModel.setEvent(event)
-    }
+    open fun onEventSent(event: EVENT) = viewModel.setEvent(event)
 
     abstract fun noAdsActive(noAdsActive: Boolean)
 
