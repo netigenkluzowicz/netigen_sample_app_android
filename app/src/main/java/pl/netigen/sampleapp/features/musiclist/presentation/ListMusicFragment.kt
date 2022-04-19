@@ -96,6 +96,4 @@ class ListMusicFragment :
     private fun allMusicLoaded(musicList: List<MusicDisplayable>) = audioListAdapter.submitList(musicList)
 
     override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) = ListMusicFragmentBinding.inflate(inflater, container, false)
-
-    override fun onEventSent(event: MusicListContract.MusicListEvent) = viewModel.setEvent(event)
 }

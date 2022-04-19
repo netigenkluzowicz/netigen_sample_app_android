@@ -16,6 +16,7 @@ import pl.netigen.core.fragment.NetigenVMFragment
 import pl.netigen.sampleapp.core.data.ViewEvent
 import pl.netigen.sampleapp.core.data.ViewState
 import pl.netigen.sampleapp.core.extension.autoCleaned
+import timber.log.Timber
 
 abstract class BaseFragment<VB : ViewBinding, STATE : ViewState, EVENT : ViewEvent, VM : BaseViewModel<STATE, EVENT>> : NetigenVMFragment() {
 
@@ -35,7 +36,11 @@ abstract class BaseFragment<VB : ViewBinding, STATE : ViewState, EVENT : ViewEve
 
     abstract fun initView()
     abstract fun render(state: STATE)
-    abstract fun onEventSent(event: EVENT)
+
+    open fun onEventSent(event: EVENT) {
+        Timber.d("event = [$event]")
+        viewModel.setEvent(event)
+    }
 
     abstract fun noAdsActive(noAdsActive: Boolean)
 
