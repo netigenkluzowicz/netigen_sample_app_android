@@ -8,7 +8,6 @@ import pl.netigen.sampleapp.core.data.ViewEvent
 import pl.netigen.sampleapp.core.data.ViewState
 
 abstract class BaseViewModel<STATE : ViewState, Event : ViewEvent> : ViewModel() {
-
     private val initialState: STATE by lazy { setInitialState() }
     abstract fun setInitialState(): STATE
 
@@ -21,19 +20,16 @@ abstract class BaseViewModel<STATE : ViewState, Event : ViewEvent> : ViewModel()
         viewModelScope.launch { _event.emit(event) }
     }
 
-    abstract fun handleEvents(event: Event)
-
     init {
         subscribeToEvents()
     }
 
+    abstract fun handleEvents(event: Event)
+
     private fun subscribeToEvents() {
         viewModelScope.launch {
-            try {
-                _event.collect {
-                    handleEvents(it)
-                }
-            } catch (e: Exception) {
+            _event.collect {
+                handleEvents(it)
             }
         }
     }
