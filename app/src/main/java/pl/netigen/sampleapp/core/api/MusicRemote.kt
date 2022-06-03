@@ -1,8 +1,10 @@
 package pl.netigen.sampleapp.core.api
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import pl.netigen.sampleapp.features.musiclist.domain.model.Music
 
+@Keep
 data class MusicRemote(
     @SerializedName("baseBpm") val baseBpm: Int,
     @SerializedName("genre") val genre: String,
