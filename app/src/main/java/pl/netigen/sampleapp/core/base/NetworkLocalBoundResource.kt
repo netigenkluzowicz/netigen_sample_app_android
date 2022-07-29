@@ -36,8 +36,9 @@ inline fun <DB, REMOTE> networkLocalBoundResource(
     } else {
         emitAll(fetchFromLocal().map { dbData -> Resource.success(dbData) })
     }
+}.catch {
+    emit(Resource.error(it.toString()))
 }
 
 @Suppress("BlockingMethodInNonBlockingContext")
-suspend fun ResponseBody.stringSuspending() =
-    withContext(Dispatchers.IO) { string() }
+suspend fun ResponseBody.stringSuspending() = withContext(Dispatchers.IO) { string() }
